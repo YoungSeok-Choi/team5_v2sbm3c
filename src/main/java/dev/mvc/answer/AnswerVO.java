@@ -10,7 +10,7 @@ public class AnswerVO {
     private int answerno;
     private int qnano;
     private int adminid;
-    private String answer;
+    private String answer = ""; // avoiding NPE
     
     
     public AnswerVO(int answerno, int qnano, int adminid, String answer) {
@@ -18,6 +18,10 @@ public class AnswerVO {
         this.qnano = qnano;
         this.adminid = adminid;
         this.answer = answer;
+    }
+    
+    public AnswerVO() {
+        
     }
     
 }
