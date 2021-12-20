@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world http://localhost:9091</title>
+<title>심슨네 가족</title>
 <!-- /static 기준 -->
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -17,10 +17,11 @@
     
 </head>
 <body>
+<jsp:include page="./menu/top.jsp" flush='false' />
   
   <DIV style='width: 100%; margin: 30px auto; text-align: center;'>
     <%-- /static/images/resort02.jpg --%>
-    <IMG src='/images/resort02.jpg' style='width: 50%;'>
+    <IMG src='/images/main_page.jpg' style='width: 50%;'>
   </DIV>
   
   <DIV style='margin: 0px auto; width: 90%;'>
@@ -29,10 +30,11 @@
      <DIV style='float: left; width: 50%;'>
     </DIV>  
   </DIV>
-        home index
+ 
   <DIV style='width: 94.8%; margin: 0px auto;'>
   </DIV>  
  
+<jsp:include page="./menu/bottom.jsp" flush='false' />
  
 </body>
 </html>
