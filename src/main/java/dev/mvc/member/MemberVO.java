@@ -10,7 +10,7 @@ import lombok.ToString;
     passwd    VARCHAR(50)   NOT NULL, 
     name      VARCHAR(30)   NOT NULL, 
     phone     VARCHAR(20)   NOT NULL, 
-    email     VARCHAR(80)   NOT NULL, 
+    email     VARCHAR(80)   NOT NULL UNIQUE,
     address   VARCHAR(150)  NULL, 
     grade     NUMBER(3)     NOT NULL,
     PRIMARY KEY (memberid)

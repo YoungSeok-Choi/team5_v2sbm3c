@@ -23,7 +23,7 @@
       <A class='menu_link'  href='/'>Q/A</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>챗봇 서비스</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>관리자 로그인</A><span class='top_menu_sep'> </span>                
-      <A class='menu_link'  href='/'>회원가입</A><span class='top_menu_sep'> </span>      
+      <A class='menu_link'  href='/member/create.do'>회원가입</A><span class='top_menu_sep'> </span>      
     </NAV>
   </DIV>
   

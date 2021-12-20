@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace = "dev.mvc.member.MemberDAOInter">
+
+    <select id="checkID" resultType="int" parameterType="String">
+      SELECT COUNT(id) as cnt
+      FROM member
+      WHERE id=#{id}
+    </select>
+    
+    <select id="checkEmail" resultType="int" parameterType="String">
+      SELECT COUNT(*) 
+      FROM member
+      WHERE email = #{email}
+    </select>
+      
+    <insert id="create" parameterType="dev.mvc.member.MemberVO">
+      INSERT INTO member(memberid, id, passwd, name, phone, email, address, grade)
+      VALUES (member_seq.nextval, #{id}, #{passwd}, #{name}, #{phone}, #{email}, #{address}, #{grade})
+    </insert>
+    
+    <!-- 회원 가입 -->
+    <!-- <insert id="join_member" parameterType="member">
+        insert into member values(#{id}, #{pw}, #{email}, now(), now(), 'false', #{approval_key})
+    </insert> -->
+</mapper> 
