@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.faq.FaqDAOInter">
+
+    <insert id="createFaq" parameterType="dev.mvc.faq.FaqVO">
+            insert into faq (faqno, title, text, Cdate, adminid)
+            values (faq_seq.nextval, #{title}, #{text}, sysdate, 1)    
+    </insert>
+    
+    <select id="getListWithFK" resultType="dev.mvc.faq.FaqVO" parameterType="int">
+            select faqno, title, text, Cdate, adminid
+            from faq
+            where adminid=#{adminid}
+    </select>
+    
+    <select id="getAll" resultType="dev.mvc.faq.FaqVO">
+            select faqno, title, text, Cdate, adminid
+            from faq
+    </select>
+
+</mapper>

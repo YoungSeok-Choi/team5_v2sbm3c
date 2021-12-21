@@ -17,10 +17,11 @@
           <A class='menu_link'  href='/member/login.do' >Login</A><span class='top_menu_sep'> </span>
         </c:otherwise>
       </c:choose>    
-      
+      <A class='menu_link'  href='/'>공지사항</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>주택정보 조회</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>주택 추천</A><span class='top_menu_sep'> </span>
-      <A class='menu_link'  href='/'>Q/A</A><span class='top_menu_sep'> </span>
+      <A class='menu_link'  href='/'>My Q/A</A><span class='top_menu_sep'> </span>
+      <A class='menu_link'  href='/faqlist'>자주묻는 질문(FAQ)</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>챗봇 서비스</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>관리자 로그인</A><span class='top_menu_sep'> </span>                
       <A class='menu_link'  href='/member/create.do'>회원가입</A><span class='top_menu_sep'> </span>      
