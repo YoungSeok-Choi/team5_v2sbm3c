@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace = "dev.mvc.house.HouseDAOInter">
+
+  <insert id="createHouse"  parameterType="dev.mvc.house.HouseVO">
+            insert into house (houseno, nomination, area, terrain, price, hdate, likes, himgae, loca, hname, adminid)
+            values (faq_seq.nextval, #{nomination}, #{area}, #{terrain}, #{price}, sysdate, #{likes}, #{himage}, #{loca}, #{hname}, 1)    
+  </insert>
+
+  <select id="hread" resultType="dev.mvc.house.HouseVO" parameterType="int">
+            SELECT houseno, nomination, area, terrain, price, hdate, likes, himgae, loca, hname, adminid
+            FROM house
+            WHERE houseno = #{houseno}
+  </select>
+  
+    <update id="update" parameterType="dev.mvc.house.HouseVO">
+    UPDATE house
+    SET name=#{name}, seqno=#{seqno}
+    WHERE houseno = #{houseno}
+  </update> 
+  
+</mapper>
