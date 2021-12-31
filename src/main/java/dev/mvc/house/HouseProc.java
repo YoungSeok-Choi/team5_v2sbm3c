@@ -21,8 +21,8 @@ public int create(HouseVO houseVO) {
 
 @Override
 public List<HouseVO> list_houseno_asc() {
-    // TODO Auto-generated method stub
-    return null;
+    List<HouseVO> list = this.houseDAO.list_houseno_asc();
+    return list;
 }
 
 @Override
