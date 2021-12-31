@@ -16,9 +16,7 @@ public class HouseCont {
     @Qualifier("dev.mvc.house.HouseProc")
     private HouseProcInter houseProc;
 
-    public HouseCont() {
-        System.out.println("-> HouseCont created.");
-    }
+
     /** 등록폼 */
     @RequestMapping(value = "/house/create.do", method = RequestMethod.GET)
     public ModelAndView create() {
