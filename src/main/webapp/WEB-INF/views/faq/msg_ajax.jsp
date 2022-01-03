@@ -91,31 +91,14 @@
           </LI>                                                                      
         </c:when> 
         
-         <c:when test="${param.code == 'passwd_update_success'}"> <%-- Java if --%>
-          <LI class='li_none'>
-            <span class="span_success">${param.mname }님(${param.id }) 패스워드를 변경했습니다.</span>
-          </LI>
-          <LI class='li_none'>
-            <button type='button' 
-                         onclick="location.href='/'"
-                         class="btn btn-primary">확인</button>
-          </LI>                                                                 
-        </c:when>
-        <c:when test="${code == 'passwd_update_fail'}"> <%-- Java if --%>
-          <LI class='li_none'>
-            <span class="span_fail">${param.mname }님(${param.id }) 패스워드 변경에 실패했습니다.</span>
-          </LI>                                                                      
-        </c:when> 
-        
-        
-          <c:when test="${code == 'faq_update_success'}"> <%-- Java if --%>
+         <c:when test="${code == 'faq_update_success'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_success">faq 업데이트 성공</span>
           </LI>
           <LI class='li_none'>
             <button type='button' 
-                         onclick="location.href='/faq/faqlist'"
-                         class="btn btn-primary">목록</button>
+                         onclick="window.close()"
+                         class="btn btn-primary">확인</button>
           </LI>                                                                 
         </c:when>
         
@@ -125,15 +108,15 @@
           </LI>
           <LI class='li_none'>
             <button type='button' 
-                         onclick="location.href='/faq/'"
-                         class="btn btn-primary">목록</button>
+                         onclick="window.close()"
+                         class="btn btn-primary">창 닫기</button>
           </LI>                                                                             
         </c:when> 
         
          <c:when test="${code == 'faq_success'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_success">FaQ 등록 성공</span>
-            <button type='button' onclick="location.href='/faq/faqlist'" class="btn btn-primary">목록</button>
+            <button type='button' onclick="location.href='/faq/'" class="btn btn-primary">목록</button>
           </LI>                                                                      
         </c:when> 
         
@@ -143,7 +126,7 @@
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                      
         </c:when> 
-
+        
         <c:otherwise>
           <LI class='li_none_left'>
             <span class="span_fail">알 수 없는 에러로 작업에 실패했습니다.</span>
