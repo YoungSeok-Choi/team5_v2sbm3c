@@ -24,7 +24,7 @@
    
   <DIV class='menu_line'></DIV>
       <h1>FaQ 삭제 확인 창</h1>   
-      <FORM name='frm' method='POST' action='/faq/${faqVO.faqno }/update.do' class="form-horizontal">
+      <FORM name='frm' method='POST' action='/faq/${faqVO.faqno }/delete.do' class="form-horizontal">
         <input type="hidden" name="adminnid" value="1"> <%-- 관리자 개발후 변경 필요 --%>
         
         <div class="form-group">

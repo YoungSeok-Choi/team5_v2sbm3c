@@ -27,9 +27,13 @@ public class FaqCont {
      * @return
      */
     @RequestMapping(value="/faq/msg.do", method=RequestMethod.GET)
-    public ModelAndView msg(String url){
+    public ModelAndView msg(String url, String code){
       ModelAndView mav = new ModelAndView();
-
+      
+      // msg 메서드의 매개변수 이름과, rediect로 보낸 Proc메서드의 변수 binding
+//      System.out.println(code);
+//      System.out.println(url);
+      mav.addObject("code", code);
       mav.setViewName(url); // forward
       
       return mav; // forward
@@ -103,7 +107,6 @@ public class FaqCont {
      * @param faqno
      * @return
      */
-    @ResponseBody
     @RequestMapping(value = "/faq/{faqno}/update.do", method=RequestMethod.POST)
     public ModelAndView updateProc(FaqVO faqVO, @PathVariable String faqno) {
        
@@ -112,7 +115,8 @@ public class FaqCont {
         int pk = Integer.parseInt(faqno);
         int result = faqProc.updateFaq(faqVO);
         
-        System.out.println("result : " + result);
+        //System.out.println("result : " + result);
+        
         if (result < 1) {
            mav.addObject("code", "faq_update_fail");
         } else {
