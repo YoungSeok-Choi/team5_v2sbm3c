@@ -8,6 +8,7 @@
     <NAV class='top_menu'>
       <span style='padding-left: 0.5%;'></span>
       <A class='menu_link'  href='/' >심슨's House</A><span class='top_menu_sep'> </span>
+<<<<<<< HEAD
       
       <c:choose>
         <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
@@ -17,6 +18,8 @@
           <A class='menu_link'  href='/member/login.do' >Login</A><span class='top_menu_sep'> </span>
         </c:otherwise>
       </c:choose>   
+=======
+>>>>>>> de804d63318584b3a73f6192930d872dba2aed87
        
       <A class='menu_link'  href='/'>공지사항</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>주택정보 조회</A><span class='top_menu_sep'> </span>
@@ -34,8 +37,18 @@
       
       <A class='menu_link'  href='/faqlist'>자주묻는 질문(FAQ)</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>챗봇 서비스</A><span class='top_menu_sep'> </span>
-      <A class='menu_link'  href='/'>관리자 로그인</A><span class='top_menu_sep'> </span>                
-      <A class='menu_link'  href='/member/create.do'>회원가입</A><span class='top_menu_sep'> </span>      
+      
+      <c:choose>
+        <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
+           <A class='menu_link'  href='/member/read.do' onclick="location.href=this.href+'?memberid='+${sessionScope.memberid };return false;" >My Page</A><span class='top_menu_sep'> </span>
+           ${sessionScope.id } <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span>           
+        </c:when>
+        <c:otherwise>
+          <A class='menu_link'  href='/'>관리자 로그인</A><span class='top_menu_sep'> </span>
+          <A class='menu_link'  href='/member/login.do' >Login</A><span class='top_menu_sep'> </span>   
+        </c:otherwise>
+      </c:choose>
+      
     </NAV>
   </DIV>
   
