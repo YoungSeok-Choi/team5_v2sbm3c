@@ -7,24 +7,11 @@
     <DIV class='top_menu_label'>주택 매물시스템</DIV>
     <NAV class='top_menu'>
       <span style='padding-left: 0.5%;'></span>
-      <A class='menu_link'  href='/' >심슨's House</A><span class='top_menu_sep'> </span>
-<<<<<<< HEAD
-      
-      <c:choose>
-        <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
-           ${sessionScope.id } <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span>
-        </c:when>
-        <c:otherwise>
-          <A class='menu_link'  href='/member/login.do' >Login</A><span class='top_menu_sep'> </span>
-        </c:otherwise>
-      </c:choose>   
-=======
->>>>>>> de804d63318584b3a73f6192930d872dba2aed87
-       
+      <A class='menu_link'  href='/' >심슨's House</A><span class='top_menu_sep'> </span>  
+ 
       <A class='menu_link'  href='/'>공지사항</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>주택정보 조회</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>주택 추천</A><span class='top_menu_sep'> </span>
-      <A class='menu_link'  href='/qnacatelist'>My Q/A</A><span class='top_menu_sep'> </span>
       
       <c:choose>
         <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
