@@ -16,11 +16,22 @@
         <c:otherwise>
           <A class='menu_link'  href='/member/login.do' >Login</A><span class='top_menu_sep'> </span>
         </c:otherwise>
-      </c:choose>    
+      </c:choose>   
+       
       <A class='menu_link'  href='/'>공지사항</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>주택정보 조회</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>주택 추천</A><span class='top_menu_sep'> </span>
-      <A class='menu_link'  href='/'>My Q/A</A><span class='top_menu_sep'> </span>
+      <A class='menu_link'  href='/qnacatelist'>My Q/A</A><span class='top_menu_sep'> </span>
+      
+      <c:choose>
+        <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
+            <A class='menu_link'  href='/qnacatelist'>My Q/A</A><span class='top_menu_sep'> </span>
+        </c:when>
+        <c:otherwise> <%-- 로그인 하지 않은경우 표시 x --%>
+            <span></span>
+        </c:otherwise>
+      </c:choose>
+      
       <A class='menu_link'  href='/faqlist'>자주묻는 질문(FAQ)</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>챗봇 서비스</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>관리자 로그인</A><span class='top_menu_sep'> </span>                
