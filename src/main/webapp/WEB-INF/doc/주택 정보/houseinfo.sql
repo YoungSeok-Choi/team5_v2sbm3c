@@ -65,5 +65,5 @@ WHERE houseno=1;
 
 -- 삭제
 DELETE FROM house
-WHERE houseno=1;
+WHERE houseno=39;
 

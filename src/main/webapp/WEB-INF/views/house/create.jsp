@@ -28,26 +28,47 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
  
-<DIV class='title_line'>카테고리 그룹  > 등록</DIV>
+<DIV class='title_line'> 주택  > 등록</DIV>
  
 <DIV class='content_body'>
 
-  <FORM name='frm' method='POST' action='./create.do' class="form-horizontal">
+  <FORM name='frm' method='POST' action='./create.do'>
     <div class="form-group">
        <label class="control-label col-md-4">주택 이름</label>
        <div class="col-md-8">
-         <input type='text' name='hname' value='ex)1apt' required="required" placeholder="이름"
-                    autofocus="autofocus" class="form-control" style='width: 50%;'>
+      <input type='text' name='hname' value='' required="required" style='width: 60%;'
+                class="form-control" autofocus="autofocus">
        </div>
     </div>
     <div class="form-group">
-       <label class="control-label col-md-4">주택 순서</label>
+       <label class="control-label col-md-4">가격</label>
        <div class="col-md-8">
-         <input type='number' name='seqno' value='1' required="required" 
-                   placeholder="주택 순서" min="1" max="1000" step="1" 
-                   style='width: 30%;' class="form-control" >
+      <input type='text' name='price' value='' required="required" style='width: 60%;'
+                class="form-control" autofocus="autofocus">
        </div>
-    </div>  
+       
+    <div class="form-group">
+       <label class="control-label col-md-4">지목</label>
+       <div class="col-md-8">
+      <input type='text' name='nomination' value='nomi' required="required" style='width: 60%;'
+                class="form-control" autofocus="autofocus">
+        </div>
+    
+    <div class="form-group">
+       <label class="control-label col-md-4">크기</label>
+       <div class="col-md-8">
+      <input type='text' name='area' value='' required="required" style='width: 60%;'
+                class="form-control" autofocus="autofocus">
+       </div>
+    
+     <div class="form-group">
+       <label class="control-label col-md-4">위치</label>
+       <div class="col-md-8">
+      <input type='text' name='loca' value='' required="required" style='width: 60%;'
+                class="form-control" autofocus="autofocus">
+       </div>
+    
+   </div>  
     <div class="content_body_bottom" style="padding-right: 20%;">
       <button type="submit" class="btn">등록</button>
       <button type="button" onclick="location.href='./list.do'" class="btn">목록</button>

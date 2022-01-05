@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
  
 @Component("dev.mvc.house.HouseProc")
 public class HouseProc implements HouseProcInter {
@@ -27,22 +28,27 @@ public List<HouseVO> list_houseno_asc() {
 
 @Override
 public List<HouseVO> list_price_asc() {
-    // TODO Auto-generated method stub
-    return null;
+    List<HouseVO> list = this.houseDAO.list_price_asc();
+    return list;
 }
 
 @Override
 public HouseVO read(int houseno) {
-    // TODO Auto-generated method stub
-    return null;
+    HouseVO houseVO = this.houseDAO.read(houseno);
+    return houseVO;
 }
 
 @Override
 public int update(HouseVO houseVO) {
-    // TODO Auto-generated method stub
-    return 0;
+    int cnt = this.houseDAO.update(houseVO);
+    return cnt;
 }
 
+@Override
+public int delete(int houseno) {
+    int cnt = this.houseDAO.delete(houseno);
+    return cnt;
+}
   
 
 

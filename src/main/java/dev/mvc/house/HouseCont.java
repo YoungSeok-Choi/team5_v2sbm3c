@@ -32,14 +32,15 @@ public class HouseCont {
      */
     @RequestMapping(value = "/house/create.do", method = RequestMethod.POST)
     public ModelAndView create(HouseVO houseVO) {
-
+//        insert into house (houseno, nomination, area, terrain, price, hdate, likes, himgae, loca, hname, adminid)
+//        #values (house_seq.nextval, #{nomination}, #{area}, #{terrain}, #{price}, sysdate, #{likes}, #{himage}, #{loca}, #{hname}, 1)    
         ModelAndView mav = new ModelAndView();
 
-        int hnt = this.houseProc.create(houseVO); // 등록 처리
+        int cnt = this.houseProc.create(houseVO); // 등록 처리
         
-        mav.addObject("hnt", hnt);
+        mav.addObject("cnt", cnt);
        
-        if (hnt == 1) {
+        if (cnt == 1) {
                        mav.setViewName("redirect:/house/list.do");
         } else {
             mav.addObject("code", "create_fail"); 
@@ -64,8 +65,6 @@ public class HouseCont {
     
     /**
      * 조회 + 수정폼
-     * 
-     * @param categrpno 조회할 카테고리 번호
      * @return
      */
     @RequestMapping(value = "/house/read_update.do", method = RequestMethod.GET)
@@ -91,10 +90,10 @@ public class HouseCont {
 
         ModelAndView mav = new ModelAndView();
 
-        int hnt = this.houseProc.update(houseVO);
-        mav.addObject("hnt", hnt); 
+        int cnt = this.houseProc.update(houseVO);
+        mav.addObject("cnt", cnt); 
 
-        if (hnt == 1) {
+        if (cnt == 1) {
             mav.setViewName("redirect:/house/list.do");
         } else {
             mav.addObject("code", "update"); 
@@ -104,5 +103,46 @@ public class HouseCont {
         return mav;
     }
     
+    /**
+     * 조회 + 삭제폼
+     */
+    @RequestMapping(value = "/house/read_delete.do", method = RequestMethod.GET)
+    public ModelAndView read_delete(int houseno) {
+        ModelAndView mav = new ModelAndView();
+
+        HouseVO houseVO = this.houseProc.read(houseno); 
+        mav.addObject("houseVO", houseVO);
+
+        List<HouseVO> list = this.houseProc.list_houseno_asc();
+        mav.addObject("list", list);
+
+        mav.setViewName("/house/read_delete"); //
+        return mav;
+    }
+    
+    /**
+     * 삭제
+     */
+    @RequestMapping(value="/house/delete.do", method=RequestMethod.POST )
+    public ModelAndView delete(int houseno) {
+      ModelAndView mav = new ModelAndView();
+      
+      HouseVO houseVO = this.houseProc.read(houseno);
+      mav.addObject("houseVO", houseVO);
+      
+      int cnt = this.houseProc.delete(houseno);
+
+      
+      mav.addObject("cnt", cnt);
+      
+      if (cnt == 1) {
+          mav.addObject("code", "delete_success");
+      } else {
+          mav.addObject("code", "delete_fail");
+      }
+      mav.setViewName("/house/msg");
+      
+      return mav;
+    }
     
 }

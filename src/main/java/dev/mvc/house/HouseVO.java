@@ -37,10 +37,36 @@ public class HouseVO {
       
   }
   
-  public HouseVO(int houseno, String hname, int price, String hdate) {
-      this.houseno = houseno;
+
+  public String getHname() {
+      return hname;
+  }
+  
+  public void setHname(String hname) {
       this.hname = hname;
-      this.price = price;
-      this.hdate = hdate;
+  }
+  
+  public String getNomination() {
+      return nomination;
+  }
+  
+  public void setNomination(String nomination) {
+      this.nomination = nomination;
+  }
+  
+  public String getArea() {
+      return area;
+  }
+  
+  public void setArea(String area) {
+      this.area = area;
+  }
+  
+  public String getLoca() {
+      return loca;
+  }
+  
+  public void setLoca(String loca) {
+      this.loca = loca;
   }
 }

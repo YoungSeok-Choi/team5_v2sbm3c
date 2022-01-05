@@ -5,21 +5,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace = "dev.mvc.house.HouseDAOInter">
 
-  <insert id="createHouse"  parameterType="dev.mvc.house.HouseVO">
-            insert into house (houseno, nomination, area, terrain, price, hdate, likes, himgae, loca, hname, adminid)
-            values (faq_seq.nextval, #{nomination}, #{area}, #{terrain}, #{price}, sysdate, #{likes}, #{himage}, #{loca}, #{hname}, 1)    
+  <insert id="create"  parameterType="dev.mvc.house.HouseVO">
+            INSERT INTO house(houseno, nomination, area, terrain, price, hdate, likes, loca,  hname)
+            VALUES (house_seq.nextval, #{nomination}, #{area}, #{terrain}, #{price}, sysdate, #{likes}, #{loca} , #{hname})
   </insert>
 
-  <select id="hread" resultType="dev.mvc.house.HouseVO" parameterType="int">
-            SELECT houseno, nomination, area, terrain, price, hdate, likes, himgae, loca, hname, adminid
+  <select id="list_houseno_asc" resultType="dev.mvc.house.HouseVO">
+    SELECT  houseno, nomination, area, terrain, price, hdate, likes, loca, hname, adminid
+    FROM house
+    ORDER BY houseno ASC
+  </select>
+  
+  <select id="list_price_asc" resultType="dev.mvc.house.HouseVO">
+    SELECT  houseno, hname, hdate, price
+    FROM house
+    ORDER BY price ASC
+  </select>  
+  
+
+  <select id="read" resultType="dev.mvc.house.HouseVO" parameterType="int">
+            SELECT houseno, nomination, area, terrain, price, hdate, likes, loca, hname, adminid
             FROM house
             WHERE houseno = #{houseno}
   </select>
   
-    <update id="update" parameterType="dev.mvc.house.HouseVO">
+  
+  <update id="update" parameterType="dev.mvc.house.HouseVO">
     UPDATE house
-    SET name=#{name}, seqno=#{seqno}
+    SET hname=#{hname}, price=#{price}
     WHERE houseno = #{houseno}
-  </update> 
+  </update>
+  
+   
+  <delete id="delete" parameterType="int">
+    DELETE FROM house
+    WHERE houseno=#{houseno}
+  </delete>  
   
 </mapper>

@@ -27,5 +27,9 @@ public interface HouseDAOInter {
    */
   public int update(HouseVO houseVO);
   
+  /**
+   * 삭제 처리
+   */
+  public int delete(int houseno);
 
 }
