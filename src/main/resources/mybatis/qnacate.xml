@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.qnacate.QnacateDAOInter">
+
+    <insert id="createQnacate" parameterType="dev.mvc.qnacate.QnacateVO">
+        insert into qna_cate (qcateno, name, memberid, adminid)
+        values (qna_cate_seq.nextval, #{name}, #{memberid}, #{adminid})
+    </insert>
+    
+   <!--  <select id ></select> -->
+    
+
+
+
+</mapper>
