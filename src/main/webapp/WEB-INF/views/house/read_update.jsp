@@ -49,7 +49,7 @@
          <input type='text' name='nomination' value='nomi' required="required"
                     autofocus="autofocus"  style='width: 50%;'>
     </div>
-    
+   
     <div class="form-group">
        <label>크기</label>
          <input type='text' name='area' value='area' required="required"
