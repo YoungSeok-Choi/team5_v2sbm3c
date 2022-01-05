@@ -14,7 +14,6 @@ public class QnaVO {
     private String qdate = ""; 
     private int qcateno;
     
-    
     public QnaVO(int qnano, String title, String secret, String text, String qdate, int qcateno) {
         this.qnano = qnano;
         this.title = title;
