@@ -15,7 +15,7 @@
       
       <c:choose>
         <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
-            <A class='menu_link'  href='/qnacatelist'>My Q/A</A><span class='top_menu_sep'> </span>
+            <A class='menu_link'  href='/qnalist'>My Q/A</A><span class='top_menu_sep'> </span>
         </c:when>
         <c:otherwise> <%-- 로그인 하지 않은경우 표시 x --%>
             <span></span>
@@ -28,7 +28,7 @@
       <c:choose>
         <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
            <A class='menu_link'  href='/member/read.do' onclick="location.href=this.href+'?memberid='+${sessionScope.memberid };return false;" >My Page</A><span class='top_menu_sep'> </span>
-           ${sessionScope.id } <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span>           
+           [ ${sessionScope.id } ] <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span>           
         </c:when>
         <c:otherwise>
           <A class='menu_link'  href='/'>관리자 로그인</A><span class='top_menu_sep'> </span>

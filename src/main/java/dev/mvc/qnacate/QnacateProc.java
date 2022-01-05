@@ -10,7 +10,9 @@ public class QnacateProc implements QnacateProcInter {
     private QnacateDAOInter qnacateDAO;
 
     @Override
-    public int createQnacate(QnacateVO qnacateVO) { return qnacateDAO.createQnacate(qnacateVO); }
+    public int createQnacate(QnacateVO qnacateVO) {
+        return qnacateDAO.createQnacate(qnacateVO);
+    }
     
     
 
