@@ -91,8 +91,8 @@
             <TD class="td_bs_left">${adminid }</TD>
             <TD class="td_bs">
                 <input type='hidden' value='${faqno }'>
-                <a href="/faq/${faqno }/update.do"><span class="glyphicon glyphicon-pencil"></span></a>
-                <a href= "/faq/${faqno }/delete.do"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="/faq/${faqno }/update.do"><IMG src='/faq/images/update.png' width = "20px" height="20px" title='수정'></a>
+                <a href= "/faq/${faqno }/delete.do"><IMG src='/faq/images/delete.png'  width = "20px" height="20px" title='삭제'></a>
             </TD>         
           </TR>   
         </c:forEach>
@@ -103,10 +103,11 @@
     </DIV>
     <hr>
     
-    <div style="text-align:left;">
-        <a href="/"  class="btn btn-info">메인페이지</a>
-        <button type="button" class="btn"><a href="/faq">FAQ 등록</a></button>
-        <jsp:include page="/WEB-INF/views/menu/bottom.jsp" flush='false' />
+     <div class="content_body_bottom">
+        <a href="/"  class="btn btn-primary btn-sm">메인페이지</a>
+        <a href="/faq" class="btn btn-primary btn-sm">FAQ 등록</a>     
     </div>
+    
+     <jsp:include page="/WEB-INF/views/menu/bottom.jsp" flush='false' />
 </body>
 </html>

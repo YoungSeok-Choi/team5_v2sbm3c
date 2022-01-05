@@ -13,14 +13,17 @@ public class QnaVO {
     private String text = ""; 
     private String qdate = ""; 
     private int qcateno;
+    private int memberid; // FK needed when insert to DB ****
     
-    public QnaVO(int qnano, String title, String secret, String text, String qdate, int qcateno) {
+    // 
+    public QnaVO(int qnano, String title, String secret, String text, String qdate, int qcateno, int memberid) {
         this.qnano = qnano;
         this.title = title;
         this.secret = secret;
         this.text = text;
         this.qdate = qdate;
         this.qcateno = qcateno;
+        this.memberid = memberid;
     }
     
     public QnaVO () {

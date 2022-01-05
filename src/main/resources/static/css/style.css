@@ -20,7 +20,9 @@
   .top_img {
     width: 100%;
     height: 100px;
-    background-image: url('/css/images/menu_top.jpg');
+    /* background-image: url('/css/images/menu_top.jpg'); */
+    /* 추후 적절한 이미지 구해 변경할 것. */
+    background-color:  #5B9FE6;
   }
   
   .top_menu_label {
