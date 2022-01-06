@@ -44,7 +44,7 @@
 
         <div class="content_body_bottom">
           <button type="submit" class="btn btn-primary">등록</button>
-          <button type="button" onclick="/faqlist'" class="btn btn-primary">목록</button>
+          <button type="button" onclick="location.href='/faqlist'" class="btn btn-primary">목록</button>
         </div>
       
       </FORM>

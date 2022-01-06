@@ -74,8 +74,8 @@
     <hr>
     
      <div class="content_body_bottom">
-        <a href="/"  class="btn btn-primary btn-sm">메인페이지</a>
-        <a href="/qna" class="btn btn-primary btn-sm">QnA 등록</a>
+        <button class="btn btn-primary btn-sm" onclick="location.href='/'">메인페이지</button>
+        <button class="btn btn-primary btn-sm" onclick="location.href='/qna'">QnA 등록</button>
     </div>
     
 <jsp:include page="/WEB-INF/views/menu/bottom.jsp" flush='false' />
