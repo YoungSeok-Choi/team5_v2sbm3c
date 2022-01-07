@@ -18,6 +18,27 @@ public interface QnaProcInter {
      * @return
      */
     public List<QnaVO> getListWithMemberid(int memberid) ;
+    
+    /**
+     * 
+     * @param qnano
+     * @return
+     */
+    public QnaVO getOneWithPK(int qnano);
+    
+    /**
+     * 
+     * @param qnaVO
+     * @return
+     */
+    public int updateQna(QnaVO qnaVO);
+    
+    /**
+     * 
+     * @param qnano
+     * @return
+     */
+    public int deleteQna(int qnano);
 
 
 }

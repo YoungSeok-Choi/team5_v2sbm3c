@@ -22,9 +22,8 @@
 <body>
 
  <jsp:include page="/WEB-INF/views/menu/top.jsp" flush='false' />
-        
-  <DIV class='menu_line'></DIV>
-    <h1>FaQ 등록 폼</h1>
+  
+   <DIV class='title_line'>FAQ 등록하기 (관리자 전용)</DIV>
       <FORM name='frm' method='POST' action='/faq' class="form-horizontal">
         <input type="hidden" name="adminnid" value="1"> <%-- 관리자 개발후 변경 필요 --%>
         
@@ -44,7 +43,7 @@
 
         <div class="content_body_bottom">
           <button type="submit" class="btn btn-primary">등록</button>
-          <button type="button" onclick="/faqlist'" class="btn btn-primary">목록</button>
+          <button type="button" onclick="location.href='/faqlist'" class="btn btn-primary">목록</button>
         </div>
       
       </FORM>

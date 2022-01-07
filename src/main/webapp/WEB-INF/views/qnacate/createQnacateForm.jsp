@@ -23,7 +23,7 @@
 
  <jsp:include page="/WEB-INF/views/menu/top.jsp" flush='false' />
  
- <DIV class='title_line'>신규 카테고리 등록</DIV>
+ <DIV class='title_line'>신규 카테고리 등록 (관리자 전용)</DIV>
     
     <DIV class='content_body'>
       <FORM name='frm' method='POST' action='/qnacate' class="form-horizontal">

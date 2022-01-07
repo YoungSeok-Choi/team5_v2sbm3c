@@ -15,7 +15,8 @@ public class QnaVO {
     private int qcateno;
     private int memberid; // FK needed when insert to DB ****
     
-    // 
+    // 추후 주택 데이터의 사용 여부에 따라 hounopk까지 포함하여 개발 할수도 있음.
+    
     public QnaVO(int qnano, String title, String secret, String text, String qdate, int qcateno, int memberid) {
         this.qnano = qnano;
         this.title = title;

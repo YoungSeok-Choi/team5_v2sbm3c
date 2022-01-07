@@ -20,5 +20,22 @@ public class QnaProc implements QnaProcInter{
     public List<QnaVO> getListWithMemberid(int memberid) {
         return qnaDAO.getListWithMemberid(memberid);
     }
+
+    @Override
+    public QnaVO getOneWithPK(int qnano) {
+        return qnaDAO.getOneWithPK(qnano);
+    }
+
+    @Override
+    public int updateQna(QnaVO qnaVO) {
+        return qnaDAO.updateQna(qnaVO);
+    }
+
+    @Override
+    public int deleteQna(int qnano) {
+        return qnaDAO.deleteQna(qnano);
+    }
+    
+    
     
 }

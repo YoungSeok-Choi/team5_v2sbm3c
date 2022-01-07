@@ -18,16 +18,16 @@
 <body>
 
  <jsp:include page="/WEB-INF/views/menu/top.jsp" flush='false' />
+ 
+ <DIV class='title_line'>질문 등록하기</DIV>
         
-  <DIV class='menu_line'></DIV>
-    <h1>QnA 등록하기</h1>
       <FORM name='frm' method='POST' action='/qna' class="form-horizontal">
         <input type="hidden" name="adminnid" value="1"> <%-- 관리자 개발후 변경 필요 --%>
         
         <div class="form-group">
            <label class="control-label col-md-2">제목</label>
            <div class="col-md-10">
-             <input type='text' name='title' value='FAQ title' required="required" 
+             <input type='text' name='title' value='제목 작성란' required="required" 
                        autofocus="autofocus" class="form-control" style='width: 90%;'>
            </div>
         </div>
@@ -36,10 +36,11 @@
       <div class="form-group">
            <label class="control-label col-md-2">질문 카테고리 선택</label>
            <div class="col-md-10">
-               <select name="travel2">
-                      <option value="1" selected="selected">주택관련</option>  
-                      <option value="2">홈페이지 이용</option>
-                      <option value="3">기타 문의사항</option>
+               <select name="qcateno">
+                      <option value="5" selected="selected">주택관련</option>  
+                      <option value="6">홈페이지 이용</option>
+                      <option value="7">기타 문의사항</option>
+                      <%-- 데이터베이스별 지정된 FK값과 해당 옵션의 값이 다를 수 있습니다. 확인하세요! --%>
               </select>
            </div>
         </div>  
@@ -47,25 +48,25 @@
         <div class="form-group">
            <label class="control-label col-md-2">본문</label>
            <div class="col-md-10">
-             <textarea name='text' required="required" class="form-control" rows="12" style='width: 90%;'>text in box</textarea>
+             <textarea name='text' required="required" class="form-control" rows="12" style='width: 90%;'>본문 작성란</textarea>
            </div>
         </div>
         
-         <div class="form-group">
-          <IMG src='/member/images/lock.png' width = "18px" height="18px">
+         <div class="form-group"> 
            <label class="control-label col-md-2">비밀글 </label>
            <div class="col-md-10">
+           <IMG src='/member/images/lock.png' width = "18px" height="18px">
+            <input type="radio" name="secret" value="N" checked="checked">NO
             <input type="radio" name="secret" value="Y">YES
-            <input type="radio" name="secret" value="N">NO
            </div>
         </div>
         
         <div class="content_body_bottom">
           <button type="submit" class="btn btn-primary">등록</button>
-          <button type="button" onclick="/qnalist'" class="btn btn-primary">목록</button>
+          <button type="button" onclick="location:href='/qnalist'" class="btn btn-primary">목록</button>
         </div>
-      
       </FORM>
+      
       <jsp:include page="/WEB-INF/views/menu/bottom.jsp" flush='false' />
 </body>
 </html>

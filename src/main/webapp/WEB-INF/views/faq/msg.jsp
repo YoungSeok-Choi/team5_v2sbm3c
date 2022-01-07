@@ -35,6 +35,7 @@
         <c:when test="${code == 'faq_delete_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_fail">FaQ게시글 삭제에 실패하였습니다.</span><br>
+            <span class="span_fail">다시 시도해 주십시오.</span>
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                      
         </c:when> 
@@ -49,6 +50,7 @@
         <c:when test="${code == 'faq_update_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_fail">faq 업데이트 실패</span>
+            <span class="span_fail">다시 시도해 주십시오.</span>
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                             
         </c:when> 
@@ -63,6 +65,7 @@
          <c:when test="${code == 'faq_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_fail">FaQ 등록 실패</span><br>
+            <span class="span_fail">다시 시도해 주십시오.</span>
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                      
         </c:when> 

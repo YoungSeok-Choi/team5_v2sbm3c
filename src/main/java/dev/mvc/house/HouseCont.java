@@ -54,8 +54,6 @@ public class HouseCont {
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView();
 
-
-        
         List<HouseVO> list = this.houseProc.list_price_asc();
         mav.addObject("list", list);
 

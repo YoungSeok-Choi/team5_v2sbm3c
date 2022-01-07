@@ -22,7 +22,7 @@
 <body>
 
     <jsp:include page="/WEB-INF/views/menu/top.jsp" flush='false' />
-    <DIV class='title_line'> <i>${memberVO.name }</i> 님 카테고리 조회 </DIV>
+    <DIV class='title_line'> 주택관리 시스템 QnA Category 관리 (관리자 전용) </DIV>
     
     <DIV class='content_body'>
       <TABLE class='table table-striped'>

@@ -50,11 +50,20 @@ function setDropdown() {
   }
 }
 
+/* To-Do 
+ *  정말로 삭제하시겠습까? 복구 안됩니다 확인하는 함수 만들어서 연결
+          ㅇㄹㄴㅇㄹㄴㄹ
+          
+ 
+ */
+
+
 </script>
 
 </head>
 <body>
 
+    <!--써도 되는지 체크 -->
   <c:set var="qnano" value="${qnaVO.qnano }"></c:set>
   <c:set var="title" value="${qnaVO.title }" />
   <c:set var="text" value="${qnaVO.text }" />
@@ -65,22 +74,23 @@ function setDropdown() {
 
  <jsp:include page="/WEB-INF/views/menu/top.jsp" flush='false' />
         
- <DIV class='title_line'>질문 수정하기</DIV>
-      <FORM name='frm' method='POST' action='/qna/${qnano }/update.do' class="form-horizontal">
+ <DIV class='title_line'>삭제 확인창</DIV>
+      <FORM name='frm' method='POST' action='/qna/${qnano }/delete.do' class="form-horizontal">
         <input type="hidden" name="adminnid" value="1"> <%-- 관리자 개발후 변경 필요 --%>
        
         
         <div class="form-group">
            <label class="control-label col-md-2">제목</label>
            <div class="col-md-10">
-             <input type='text' name='title' value='${title }' required="required" 
-                       autofocus="autofocus" class="form-control" style='width: 90%;'>
+           <span class="form-control" style='width: 90%;'>${title }</span>
+<%--              <input type='text' name='title' value='${title }' required="required" 
+                       autofocus="autofocus" class="form-control" style='width: 90%;'> --%>
            </div>
         </div>
        
        
       <div class="form-group">
-           <label class="control-label col-md-2">질문 카테고리 선택</label>
+           <label class="control-label col-md-2">질문 카테고리</label>
            <div class="col-md-10">
                <select name="qcateno">
                       <option value="5" id="fk1">주택관련</option>  
@@ -108,7 +118,7 @@ function setDropdown() {
         </div>
         
         <div class="content_body_bottom">
-          <button type="submit" class="btn btn-primary">수정하기</button>
+          <button type="submit" class="btn btn-primary">삭제하기</button>
           <button type="button" onclick="location.href='/qnalist'" class="btn btn-primary">목록</button>
         </div>
       
