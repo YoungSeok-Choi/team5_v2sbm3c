@@ -24,34 +24,23 @@
   <fieldset class='fieldset_basic'>
     <UL>
       <c:choose>
-      
-         <%-- FaQ 삭제 --%>
-         <c:when test="${code == 'faq_delete_success'}"> <%-- Java if --%>
+        <%-- QnA 결과 메시지 파일. (추후 개발 완료 이후 하나의 msg로 통합하기. --%>
+        
+        <%-- FaQ 삭제 --%>
+         <c:when test="${code == 'qna_delete_success'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">FaQ게시글 삭제에 성공하였습니다!</span><br>
-            <button type='button' onclick="location.href='/faqlist'" class="btn btn-primary">목록</button>
+            <span class="span_success">QnA게시글 삭제에 성공하였습니다!</span><br>
+            <button type='button' onclick="location.href='/qnalist'" class="btn btn-primary">목록</button>
           </LI>                                                                 
         </c:when>
-        <c:when test="${code == 'faq_delete_fail'}"> <%-- Java if --%>
+        <c:when test="${code == 'qna_delete_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">FaQ게시글 삭제에 실패하였습니다.</span><br>
+            <span class="span_fail">QnA게시글 삭제에 실패하였습니다.</span><br>
+            <span class="span_fail">다시 시도해 주십시오.</span>
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                      
         </c:when> 
         
-          <%-- FaQ 수정 --%>
-          <c:when test="${code == 'faq_update_success'}"> <%-- Java if --%>
-          <LI class='li_none'>
-            <span class="span_success">faq 업데이트 성공</span><br>
-            <button type='button' onclick="location.href='/faqlist'" class="btn btn-primary">목록</button>
-          </LI>                                                                 
-        </c:when>
-        <c:when test="${code == 'faq_update_fail'}"> <%-- Java if --%>
-          <LI class='li_none'>
-            <span class="span_fail">faq 업데이트 실패</span>
-            <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
-          </LI>                                                                             
-        </c:when> 
         
         <%-- FaQ 등록 --%>
          <c:when test="${code == 'qna_create_success'}"> <%-- Java if --%>
@@ -63,9 +52,34 @@
          <c:when test="${code == 'fqna_create_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_fail">QnA 등록 실패</span><br>
+            <span class="span_fail">다시 시도해 주십시오.</span>
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                      
         </c:when> 
+        
+        <%-- FaQ 수정 --%>
+         <c:when test="${code == 'qna_update_success'}"> <%-- Java if --%>
+          <LI class='li_none'>
+            <span class="span_success">QnA 수정 성공!</span><br>
+            <button type='button' onclick="location.href='/qnalist'" class="btn btn-primary">목록</button>
+          </LI>                                                                      
+        </c:when> 
+         <c:when test="${code == 'qna_update_fail'}"> <%-- Java if --%>
+          <LI class='li_none'>
+            <span class="span_fail">QnA 수정 실패</span><br>
+            <span class="span_fail">다시 시도해 주십시오.</span>
+            <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
+          </LI>                                                                      
+        </c:when> 
+
+        <%-- Session 아이디 사라지는 문제가 있음.. 다시 로그인 유도. --%>
+        <c:when test="${code == 'session_fail' && sessionScope.id != null}">
+          <LI class='li_none'>
+            <span class="span_fail">세션이 만료되었습니다.<br>다시 로그인해주세요</span><br></LI>  
+            <%-- <c:if test="${sessionScope.id != null}"> 로그인 한 경우 --%>
+            <button type='button' onclick="location.href='/member/logout.do'" class="btn btn-primary">Logout</button>          
+        </c:when>
+
 
          <%-- 예외 메시지 --%>
         <c:otherwise>
@@ -76,9 +90,12 @@
             <span class="span_fail">다시 시도해주세요.</span>
           </LI>
         </c:otherwise>
+
+      
         
         <%-- choose end (start line ->26 )  --%>
       </c:choose>
+
       <LI class='li_none'>
         <br>
         <c:choose>
