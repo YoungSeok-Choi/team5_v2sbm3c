@@ -55,10 +55,17 @@ public interface MemberDAOInter {
     
     /**
      * 회원 삭제 처리
-     * @param memberno
+     * @param memberid
      * @return
      */
-    public int delete(int memberno);
+    public int delete(int memberid);
+    
+    /**
+     * 회원 삭제_update
+     * @param memberid
+     * @return
+     */
+    public int delete_update(int memberid);
     
     /**
      * 현재 패스워드 검사

@@ -152,6 +152,8 @@ public class MemberCont {
      public ModelAndView read(int memberid, HttpSession session){
        ModelAndView mav = new ModelAndView();
        boolean admin_flag = (boolean)session.getAttribute("admin_flag");
+       //int grade = (int)session.getAttribute("grade");
+       //System.out.println("-->"+grade);
        
        MemberVO memberVO = this.memberProc.read(memberid);
        mav.addObject("memberVO", memberVO);
@@ -229,8 +231,9 @@ public class MemberCont {
        // System.out.println("id: " + memberVO.getId());
        MemberVO memberVO = this.memberProc.read(memberid);
        
-       int cnt= memberProc.delete(memberid);
-
+       // int cnt= memberProc.delete(memberid); // 삭제
+       int cnt= memberProc.delete_update(memberid); // grade 99로 변경
+       
        if (cnt == 1) {
          mav.addObject("code", "delete_success");
          mav.addObject("name", memberVO.getName());  // 홍길동님(user4) 회원 정보를 변경했습니다.
@@ -245,6 +248,7 @@ public class MemberCont {
        mav.setViewName("redirect:/member/msg.do");
        
        return mav;
+       
      }
      
      /**

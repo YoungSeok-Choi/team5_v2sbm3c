@@ -68,6 +68,12 @@ public class MemberProc implements MemberProcInter {
         int cnt = this.memberDAO.delete(memberid);
         return cnt;
     }
+    
+    @Override
+    public int delete_update(int memberid) {
+        int cnt = this.memberDAO.delete_update(memberid);
+        return cnt;
+    }
 
     @Override
     public int passwd_check(HashMap<Object, Object> map) {
@@ -140,6 +146,8 @@ public class MemberProc implements MemberProcInter {
             System.out.println("메일발송 실패 : " + e);
         }
     }
+
+    
 
     
 }
