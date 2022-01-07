@@ -38,7 +38,7 @@
 <jsp:include page="../menu/top.jsp" flush='false' />
  
   <DIV class='title_line'>
-    회원목록 (관리자 전용)
+        회원목록
   </DIV>
 
   <DIV class='content_body'>
@@ -86,7 +86,7 @@
     <TR>
       <TD class=td_basic>${memberid}</TD>
       <TD class='td_left'><A href="./read.do?memberid=${memberid}">${id}</A></TD>
-      <TD class='td_left'><A href="./read.do?memberid=${memberid}">${name}</A></TD>
+      <TD class='td_basic'>${name}</TD>
       <TD class='td_basic'>${email}</TD>
       <TD class='td_basic'>${phone}</TD>
       <TD class='td_left'>

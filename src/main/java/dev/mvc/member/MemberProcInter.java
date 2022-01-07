@@ -94,19 +94,4 @@ public interface MemberProcInter {
     public void sendEmail(MemberVO vo, String div) throws Exception;
 
     
-    /**
-     * 로그인된 회원 계정인지 검사합니다.
-     * @param session
-     * @return true: 관리자
-     */
-    public boolean isMember(HttpSession session);   
-
-    /**
-     * 로그인된 관리자인지 검사합니다.
-     * @param session
-     * @return true: 관리자
-     */
-    public boolean isAdmin(HttpSession session);
-
-    
 }

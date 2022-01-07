@@ -116,7 +116,7 @@
   </div> <!-- ---------- Modal END ---------- -->
  
   <DIV class='title_line'>
-    패스워드 변경
+    ${name}님 패스워드 변경    
   </DIV>
 
   <DIV class='content_body'>

@@ -141,45 +141,5 @@ public class MemberProc implements MemberProcInter {
         }
     }
 
-    @Override
-    public boolean isMember(HttpSession session) {
-        boolean sw = false; // 로그인하지 않은 것으로 초기화
-        int grade = 99;
-        
-        // System.out.println("-> grade: " + session.getAttribute("grade"));
-        if (session != null) {
-          String id = (String)session.getAttribute("id");
-          if (session.getAttribute("grade") != null) {
-            grade = (int)session.getAttribute("grade");
-          }
-          
-          
-          if (id != null && grade <= 20){ // 관리자 + 회원
-            sw = true;  // 로그인 한 경우
-          }
-        }
-               
-        return sw;
-    }
-
-    @Override
-    public boolean isAdmin(HttpSession session) {
-        boolean sw = false; // 로그인하지 않은 것으로 초기화
-        int grade = 99;
-        
-        // System.out.println("-> grade: " + session.getAttribute("grade"));
-        if (session != null) {
-          String id = (String)session.getAttribute("id");
-          if (session.getAttribute("grade") != null) {
-            grade = (int)session.getAttribute("grade");
-          }
-          
-          if (id != null && grade <= 9){ // 관리자
-            sw = true;  // 로그인 한 경우
-          }
-        }
-        
-        return sw;
-    }
     
 }

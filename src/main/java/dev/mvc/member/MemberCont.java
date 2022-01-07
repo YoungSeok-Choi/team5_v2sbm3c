@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MemberCont {
@@ -32,7 +33,6 @@ public class MemberCont {
     // http://localhost:9091/member/checkEmail.do?email=user1@user.com
     /**
      * Email 중복 체크, JSON 출력
-     * 
      * @return
      */
     @ResponseBody
@@ -49,7 +49,6 @@ public class MemberCont {
     // http://localhost:9091/member/checkID.do?id=user1
     /**
      * ID 중복 체크, JSON 출력
-     * 
      * @return
      */
     @ResponseBody
@@ -150,11 +149,20 @@ public class MemberCont {
       * @return
       */
      @RequestMapping(value="/member/read.do", method=RequestMethod.GET)
-     public ModelAndView read(int memberid){
+     public ModelAndView read(int memberid, HttpSession session){
        ModelAndView mav = new ModelAndView();
+       boolean admin_flag = (boolean)session.getAttribute("admin_flag");
        
        MemberVO memberVO = this.memberProc.read(memberid);
        mav.addObject("memberVO", memberVO);
+       if (admin_flag) {
+           mav.addObject("title", "회원정보");
+           mav.addObject("admin_flag", true);
+       } else{
+           mav.addObject("title", "My Page");
+           mav.addObject("admin_flag", false);
+       }
+       
        mav.setViewName("/member/read"); // /member/read.jsp
        
        return mav;
@@ -193,8 +201,15 @@ public class MemberCont {
       * @return
       */
      @RequestMapping(value="/member/delete.do", method=RequestMethod.GET)
-     public ModelAndView delete(int memberid){
+     public ModelAndView delete(int memberid, HttpSession session){
        ModelAndView mav = new ModelAndView();
+       boolean admin_flag = (boolean)session.getAttribute("admin_flag");
+       
+       if (admin_flag) {
+           mav.addObject("title", "회원삭제");
+       } else{
+           mav.addObject("title", "회원탈퇴");
+       }
        
        MemberVO memberVO = this.memberProc.read(memberid);
        mav.addObject("memberVO", memberVO);
@@ -211,10 +226,8 @@ public class MemberCont {
      @RequestMapping(value="/member/delete.do", method=RequestMethod.POST)
      public ModelAndView delete_proc(int memberid){
        ModelAndView mav = new ModelAndView();
-       
        // System.out.println("id: " + memberVO.getId());
        MemberVO memberVO = this.memberProc.read(memberid);
-       
        
        int cnt= memberProc.delete(memberid);
 
@@ -242,6 +255,9 @@ public class MemberCont {
      @RequestMapping(value="/member/passwd_update.do", method=RequestMethod.GET)
      public ModelAndView passwd_update(int memberid){
        ModelAndView mav = new ModelAndView();
+       
+       MemberVO memberVO = this.memberProc.read(memberid);
+       mav.addObject("name", memberVO.getName());
        mav.setViewName("/member/passwd_update"); // passwd_update.jsp
        
        return mav;
@@ -388,8 +404,7 @@ public class MemberCont {
       * @param session 로그인 정보를 메모리에 기록
       * @param id  회원 아이디
       * @param passwd 회원 패스워드
-      * @param id_save 회원 아이디 Cookie에 저장 여부
-      * @param passwd_save 패스워드 Cookie에 저장 여부
+      * @param id_passwd_save 회원 아이디/passwd Cookie에 저장 여부
       * @return
       */
      // http://localhost:9091/member/login.do 
@@ -412,6 +427,7 @@ public class MemberCont {
        if (count == 1) { // 로그인 성공
          // System.out.println(id + " 로그인 성공");
          MemberVO memberVO = memberProc.readById(id);
+         session.setAttribute("admin_flag", false);
          session.setAttribute("memberid", memberVO.getMemberid()); // 서버의 메모리에 기록
          session.setAttribute("id", id);
          session.setAttribute("name", memberVO.getName());
@@ -585,7 +601,37 @@ public class MemberCont {
         return mav;
      }
      
-     
+     /**
+      * 회원탈퇴 처리
+      * @param memberid 회원 번호
+      * @param passwd_ck 패스워드
+      * @return
+      */
+     @RequestMapping(value="/member/withdrawal.do", method=RequestMethod.POST)
+     public ModelAndView withdrawal(int memberid, String passwd_ck){
+       ModelAndView mav = new ModelAndView();
+          
+       // 패스워드 검사
+       HashMap<Object, Object> map = new HashMap<Object, Object>();
+       map.put("memberid", memberid);
+       map.put("passwd", passwd_ck);
+       
+       int cnt = memberProc.passwd_check(map);
+      
+       if (cnt == 1) { // 현재 패스워드가 일치하는 경우
+           mav.addObject("code", "passwd_success");
+           mav.addObject("memberid", memberid);          
+           mav.setViewName("redirect:/member/read.do");
+           //mav.setViewName("/member/delete");
+         
+       } else {
+         mav.addObject("code", "passwd_fail"); // 패스워드가 일치하지 않는 경우
+         mav.addObject("memberid", memberid);          
+         mav.setViewName("redirect:/member/read.do");
+       }
+
+       return mav;
+     }
      
      /**
       * Session test http://localhost:9091/member/session.do
@@ -602,29 +648,5 @@ public class MemberCont {
 
          return mav;
      }
-    
-     /**
-      * 목록 출력 가능
-      * @param session
-      * @return
-      */
-      @RequestMapping(value="/member/list.do", method=RequestMethod.GET)
-      public ModelAndView list(HttpSession session) {
-          
-          ModelAndView mav = new ModelAndView();
-        
-          if (this.memberProc.isAdmin(session)) {
-              List<MemberVO> list = memberProc.list();
-              mav.addObject("list", list);
 
-              mav.setViewName("/member/list"); // /webapp/WEB-INF/views/member/list.jsp
-         
-          } else {
-              mav.addObject("url", "login_need"); // login_need.jsp, redirect parameter 적용
-          
-              mav.setViewName("redirect:/member/msg.do");      
-          }
-        
-          return mav;
-      }  
 }

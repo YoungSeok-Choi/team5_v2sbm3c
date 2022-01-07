@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -31,6 +32,10 @@
 
 <script type="text/javascript">
   $(function(){
+    $('#btn_withdrawal').on('click', withdrawal);
+    $('#btn_cancel').on('click', cancel);
+    
+
     $('#phone').keyup(function (event) { // 전화번호 자동 하이픈(-)
         event = event || window.event;
         var _val = this.value.trim();
@@ -66,14 +71,80 @@
       }
       return str;
     }
+    
+    if($('#code').val() == "passwd_fail"){
+      msg = '입력된 패스워드가 일치하지 않습니다.<br>';
+      msg += "패스워드를 다시 입력해주세요.<br>"; 
+
+      $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+      $('#modal_title').html('회원탈퇴'); // 제목 
+      $('#modal_content').html(msg); // 내용
+      $('#modal_panel').modal(); // 다이얼로그 출력
+      $('#btn_send').attr('data-focus', 'passwd_ck');
+
+    }else if($('#code').val() == "passwd_success"){
+      var memverid = $('#memberid').val();
+      location.href = '/member/delete.do?memberid='+memverid;
+    }
   });
+
+  function withdrawal() {
+    var msg = '';
+
+    if($('#passwd_ck').val() ==""){
+      msg = '패스워드를 입력해주세요.<br>';
+
+      $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+      $('#modal_title').html('회원탈퇴'); // 제목 
+      $('#modal_content').html(msg); // 내용
+      $('#modal_panel').modal(); // 다이얼로그 출력
+
+      $('#passwd_ck').attr('data-focus', 'passwd_ck');
+      return false;
+    } else{
+
+      $('#frm2').submit();
+    }    
+  }
+
+  function cancel() {
+    //alert(session.getAttribute("admin_flag"));
+    var admin_flag = '<%=session.getAttribute("admin_flag")%>';
+    if(admin_flag=="true"){
+      location.href = '/member/list.do';
+    }else{
+      location.href = '/';
+    }
+  }
 </script>
 </head> 
  
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
+
+  <!-- ******************** Modal 알림창 시작 ******************** -->
+  <div id="modal_panel" class="modal fade"  role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title" id='modal_title'></h4><!-- 제목 -->
+        </div>
+        <div class="modal-body">
+          <p id='modal_content'></p>  <!-- 내용 -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btn_close" data-focus="" class="btn btn-default" 
+                      data-dismiss="modal">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ******************** Modal 알림창 종료 ******************** -->
+
   <DIV class='title_line'>
-    My Page
+    ${title}
   </DIV>
 
   <DIV class='content_body'>    
@@ -88,32 +159,14 @@
     <div class='menu_line'></div>-->
     
     <DIV id='main_panel'></DIV>
-   
-    <!-- Modal -->
-    <div class="modal fade" id="modal_panel" role="dialog">
-      <div class="modal-dialog">
-      
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h4 class="modal-title" id='modal_title'></h4> <!-- 제목 -->
-          </div>
-          <div class="modal-body">
-            <p id='modal_content'></p> <!-- 내용 -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-        
-      </div>
-    </div> <!-- Modal END -->
-      
-    <FORM name='frm' id='frm' method='POST' action='./update.do' onsubmit="return send();" class="form-horizontal">
+    
+    <input type='hidden' name='name' id='name' value='${memberVO.name }'>
+    <input type='hidden' name='code' id='code' value='${param.code}'>
+
+    <FORM name='frm' id='frm' method='POST' action='./update.do' class="form-horizontal">
       <input type='hidden' name='memberid' id='memberid' value='${memberVO.memberid }'>          
       <input type='hidden' name='id' id='id' value='${memberVO.id }'>
-      
+
       <div class="form-group">
         <label class="col-md-2 control-label" style='font-size: 0.9em;'>이메일</label>    
         <div class="col-md-10">        
@@ -139,7 +192,7 @@
       <div class="form-group">
         <label class="col-md-2 control-label" style='font-size: 0.9em;'>패스워드</label>    
         <div class="col-md-10">
-          <button type="button" onclick="location.href='./passwd_update.do?memberid=${memberid}'" class="btn btn-info btn-md">패스워드 변경</button>
+          <button type="button" onclick="location.href='./passwd_update.do?memberid=${memberVO.memberid}'" class="btn btn-info btn-md">패스워드 변경</button>
         </div>
       </div>   
    
@@ -238,18 +291,65 @@
   <!-- ----- DAUM 우편번호 API 종료----- -->
    
         </div>
-      </div>
+      </div>  
       
       <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-          <button type="submit" class="btn btn-primary btn-md">저장</button>
-          <button type="button" onclick="history.go(-1);" class="btn btn-primary btn-md">취소</button>
+          <button type="submit" class="btn btn-primary btn-md">회원정보 변경</button>
+          <button type="button" id='btn_cancel' class="btn btn-primary btn-md">취소</button>
    
         </div>
-      </div>   
+      </div> 
+      
     </FORM>
+    
   </DIV>
- 
+  <c:choose>
+    <c:when test="${admin_flag == true}">
+      <hr>
+      <DIV class='content_body'>
+        <DIV id='main_panel'></DIV>
+        <div class="form-horizontal">
+          <div class="form-group ">
+            <div class="col-md-offset-2 col-md-10">
+              <button type="button" onclick="location.href='./delete.do?memberid=${memberVO.memberid }'" class="btn btn-danger btn-md">회원삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </c:when>
+    <c:otherwise>
+      <hr>
+      <DIV class='content_body'>
+        <DIV id='main_panel'></DIV>
+        <FORM name='frm2' id='frm2' method='POST' action='./withdrawal.do' class="form-horizontal">
+          <input type='hidden' name='memberid' id='memberid' value='${memberVO.memberid }'>
+  
+          <div class="form-group">
+            <label class="col-md-2 control-label" style='font-size: 0.9em;'>패스워드 확인</label>
+            <div class="col-md-10">
+              <input type='text' class="form-control" name='passwd_ck' id='passwd_ck' autofocus="autofocus"
+                style='width: 30%;' placeholder="패스워드 확인">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12">
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+              <button type="button" id='btn_withdrawal' class="btn btn-danger btn-md">회원탈퇴</button>
+  
+            </div>
+          </div>
+        </FORM>
+      </div>
+    </c:otherwise>
+  </c:choose>
+
+  
+
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
  

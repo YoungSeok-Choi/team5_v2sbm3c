@@ -90,24 +90,14 @@
           </LI>                                                                      
         </c:when>
         <c:when test="${param.code == 'delete_success'}"> <%-- Java if --%>
-          <c:choose>
-            <c:when test="${sessionScope.admin_flag == true}"> <%-- 관리자 로그인 --%>
-              <LI class='li_none'>
-                <span class="span_success">${param.name }님(${param.id }) 회원정보 삭제에 성공했습니다.</span>
-              </LI>
-              <LI class='li_none'>
-                <button type='button' onclick="location.href='/member/list.do'" class="btn btn-primary">회원 목록</button>
-              </LI>
-            </c:when>
-            <c:otherwise> <%-- 회원 로그인 --%>
-              <LI class='li_none'>
-                <span class="span_success">${param.name }님(${param.id }) 회원탈퇴에 성공했습니다.</span>
-              </LI>
-              <LI class='li_none'>
-                <button type='button' onclick="location.href='/'" class="btn btn-primary">확인</button>
-              </LI>
-            </c:otherwise>
-          </c:choose>                                                        
+          <LI class='li_none'>
+            <span class="span_success">${param.name }님(${param.id }) 회원정보 삭제에 성공했습니다.</span>
+          </LI>
+          <LI class='li_none'>
+            <button type='button' 
+                         onclick="location.href='/member/list.do'"
+                         class="btn btn-primary">회원 목록</button>
+          </LI>                                                                 
         </c:when>        
         <c:when test="${code == 'delete_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
