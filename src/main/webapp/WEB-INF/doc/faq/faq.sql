@@ -1,12 +1,12 @@
 /**********************************/
-/* Table Name: admin */
+/* Table Name: 관리자 */
 /**********************************/
-CREATE TABLE TABLE_2(
+CREATE TABLE admin(
 		adminid                       		NUMBER(10)		 NOT NULL		 PRIMARY KEY
 );
 
-COMMENT ON TABLE TABLE_2 is 'admin';
-COMMENT ON COLUMN TABLE_2.adminid is '관리자번호';
+COMMENT ON TABLE admin is '관리자';
+COMMENT ON COLUMN admin.adminid is '관리자번호';
 
 
 /**********************************/
@@ -16,9 +16,9 @@ CREATE TABLE faq(
 		faqno                         		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		title                         		VARCHAR2(50)		 NOT NULL,
 		text                          		VARCHAR2(500)		 NOT NULL,
-		Cdate                         		DATE		 NOT NULL,
+		cdate                         		DATE		 NOT NULL,
 		adminid                       		NUMBER(10)		 NULL ,
-  FOREIGN KEY (adminid) REFERENCES TABLE_2 (adminid)
+  FOREIGN KEY (adminid) REFERENCES admin (adminid)
 );
 
 COMMENT ON TABLE faq is '자주묻는질문(FAQ)';

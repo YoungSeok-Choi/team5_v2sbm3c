@@ -27,23 +27,16 @@
       
       <c:choose>
         <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
-           <c:choose>
-                <c:when test="${sessionScope.admin_flag == true}">  <%-- 관리자 로그인 --%>
-                  <A class='menu_link'  href='/member/list.do' >회원관리</A><span class='top_menu_sep'> </span>
-                                 관리자 [ ${sessionScope.id } ] <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span> 
-                </c:when>
-                <c:otherwise> <%-- 회원 로그인 --%>
-                  <A class='menu_link'  href='/member/read.do' onclick="location.href=this.href+'?memberid='+${sessionScope.memberid };return false;" >My Page</A><span class='top_menu_sep'> </span>
-                  [ ${sessionScope.id } ] <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span> 
-                </c:otherwise>
-           </c:choose>
+           <A class='menu_link'  href='/member/read.do' onclick="location.href=this.href+'?memberid='+${sessionScope.memberid };return false;" >My Page</A><span class='top_menu_sep'> </span>
+           [ ${sessionScope.id } ] <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span>           
         </c:when>
         <c:otherwise>
-          <A class='menu_link'  href='/admin/login.do'>관리자 로그인</A><span class='top_menu_sep'> </span>
+          <A class='menu_link'  href='/'>관리자 로그인</A><span class='top_menu_sep'> </span>
           <A class='menu_link'  href='/member/login.do' >Login</A><span class='top_menu_sep'> </span>   
         </c:otherwise>
-      </c:choose> 
+      </c:choose>
       
+      <A class='menu_link'  href='/qnacatelist'>QnA Category(관리자)</A><span class='top_menu_sep'> </span>
     </NAV>
   </DIV>
   

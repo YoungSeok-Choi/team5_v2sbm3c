@@ -36,6 +36,17 @@ public class QnaProc implements QnaProcInter{
         return qnaDAO.deleteQna(qnano);
     }
     
-    
+    //zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+    @Override
+    public int deleteQnaByQcateno(int qcateno) {
+        return qnaDAO.deleteQnaByQcateno(qcateno);
+    }
+
+    @Override
+    public int countByQnacateno(int qcateno) {
+        return qnaDAO.countByQnacateno(qcateno);
+    }
+
+
     
 }

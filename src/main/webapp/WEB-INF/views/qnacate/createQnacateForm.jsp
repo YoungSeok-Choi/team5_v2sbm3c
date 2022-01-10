@@ -18,6 +18,14 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+
+<script>
+$(function () {
+    
+});
+
+
+</script>
 </head>
 <body>
 
@@ -27,7 +35,6 @@
     
     <DIV class='content_body'>
       <FORM name='frm' method='POST' action='/qnacate' class="form-horizontal">
-        <input type="hidden" name="memberid" value="1">
         <input type="hidden" name="adminid" value="1"> 
         
         <div class="form-group">

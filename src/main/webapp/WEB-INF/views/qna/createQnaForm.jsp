@@ -37,9 +37,9 @@
            <label class="control-label col-md-2">질문 카테고리 선택</label>
            <div class="col-md-10">
                <select name="qcateno">
-                      <option value="5" selected="selected">주택관련</option>  
-                      <option value="6">홈페이지 이용</option>
-                      <option value="7">기타 문의사항</option>
+                      <option value="9" selected="selected">주택관련</option>  
+                      <option value="7">홈페이지 이용</option>
+                      <option value="8">기타 문의사항</option>
                       <%-- 데이터베이스별 지정된 FK값과 해당 옵션의 값이 다를 수 있습니다. 확인하세요! --%>
               </select>
            </div>

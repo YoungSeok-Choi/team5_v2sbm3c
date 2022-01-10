@@ -41,6 +41,22 @@ public interface QnaDAOInter {
      * @return
      */
     public int deleteQna(int qnano);
+    
+    
+    /**
+     * 
+     * @param qcateno 외래 키
+     * @return 삭제된 카테고리에 해당하는 Qna개수 (동시삭제)
+     */
+    public int deleteQnaByQcateno(int qcateno);
+    
+    
+    /**
+     * 
+     * @param qcateno 기본키
+     * @return 해당 카테고리에 속한 QnA 개수
+     */
+    public int countByQnacateno(int qcateno);
 
 
 }

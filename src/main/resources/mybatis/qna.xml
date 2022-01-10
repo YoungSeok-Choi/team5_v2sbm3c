@@ -38,4 +38,18 @@
         where qnano=#{qnano}    
     </delete>
     
+    <!-- QnA 카테고리 별 소속된 개수 출력 -->
+   <select id="countByQnacateno" resultType="int" parameterType="int">
+        select count(*) as cnt
+        from qna
+        where qcateno=#{qcateno}
+    </select>
+    
+        <!-- 카테고리 별 삭제 처리 -->
+    <delete id="deleteQnaByQcateno" parameterType="int">
+        delete from qna
+        where qcateno=#{qcateno}
+    </delete>
+    
+    
 </mapper>

@@ -3,12 +3,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.member.MemberProcInter;
@@ -143,6 +146,7 @@ public class QnaCont {
         return mav;
     }
     
+    
     // Update 폼 / Proc와 거의 유사한 동작. 동작의 종류만 다름.
     @RequestMapping(value = "/qna/{qnano}/delete.do", method=RequestMethod.GET)
     public ModelAndView readForDeleteQna(@PathVariable String qnano) {
@@ -160,6 +164,11 @@ public class QnaCont {
         return mav;  
     }
     
+    /**
+     * 단일 qna 삭제하기
+     * @param qnano
+     * @return
+     */
     @RequestMapping(value = "/qna/{qnano}/delete.do", method=RequestMethod.POST)
     public ModelAndView deleteQnaProc(@PathVariable String qnano) {
         
@@ -178,7 +187,47 @@ public class QnaCont {
 
         return mav;
     }
-            
     
+    /**
+     * 특정 카테고리 별 해당하는 QnA 전부 삭제하기 (카테고리 삭제시 호출.)
+     * 
+     * @param qcateno 외래 키
+     * @return 파라미터로 넘어간 외래키에 해당하는(삭제될) QnA게시글 수
+     */
+    @RequestMapping(value = "/qna/delete_by_qcateno.do", method=RequestMethod.GET)
+    public ModelAndView deleteQnasWithView(int qcateno) { // @RequestParam int qcateno 하면 numberFomatException터짐. 왜이럴까?
+
+        ModelAndView mav = new ModelAndView();
+        int result = qnaProc.deleteQnaByQcateno(qcateno);
+
+        if (result < 1) {
+            mav.addObject("code", "qnaS_delete_fail");
+        } else {
+            mav.addObject("code", "qnaS_delete_success");
+        }
+        mav.addObject("url", "/qna/msg");
+        mav.setViewName("redirect:/qna/msg.do");
+        
+        return mav;
+    }
     
+    /**
+     * 특정 카테고리 별 해당하는 QnA 전부 삭제하기 (카테고리 삭제시 호출.)
+     * 
+     * @param qcateno 외래 키
+     * @return 파라미터로 넘어간 외래키에 해당하는(삭제될) QnA게시글 수
+     */
+    @ResponseBody
+    @RequestMapping(value = "/qna/delete_by_qcateno.do", method=RequestMethod.POST)
+    public String deleteQnaS(int qcateno) { // @RequestParam int qcateno 하면 numberFomatException터짐. 왜이럴까?
+
+        int cnt = qnaProc.deleteQnaByQcateno(qcateno);
+
+        JSONObject json = new JSONObject();
+        json.put("qcateno", qcateno);
+        json.put("cnt", cnt);
+        
+        return json.toString();
+    }
+
 }
