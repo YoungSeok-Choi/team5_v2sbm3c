@@ -302,51 +302,58 @@
       </div> 
       
     </FORM>
-    
+  
   </DIV>
   <c:choose>
-    <c:when test="${admin_flag == true}">
-      <hr>
-      <DIV class='content_body'>
-        <DIV id='main_panel'></DIV>
-        <div class="form-horizontal">
-          <div class="form-group ">
-            <div class="col-md-offset-2 col-md-10">
-              <button type="button" onclick="location.href='./delete.do?memberid=${memberVO.memberid }'" class="btn btn-danger btn-md">회원삭제</button>
+    <c:when test="${memberVO.grade != 99}">
+      <c:choose>
+        <c:when test="${admin_flag == true}">
+          <hr>
+          <DIV class='content_body'>
+            <DIV id='main_panel'></DIV>
+            <div class="form-horizontal">
+              <div class="form-group ">
+                <div class="col-md-offset-2 col-md-10">
+                  <button type="button" onclick="location.href='./delete.do?memberid=${memberVO.memberid }'"
+                    class="btn btn-danger btn-md">회원삭제</button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </c:when>
+        <c:otherwise>
+          <hr>
+          <DIV class='content_body'>
+            <DIV id='main_panel'></DIV>
+            <FORM name='frm2' id='frm2' method='POST' action='./withdrawal.do' class="form-horizontal">
+              <input type='hidden' name='memberid' id='memberid' value='${memberVO.memberid }'>
+  
+              <div class="form-group">
+                <label class="col-md-2 control-label" style='font-size: 0.9em;'>패스워드 확인</label>
+                <div class="col-md-10">
+                  <input type='text' class="form-control" name='passwd_ck' id='passwd_ck' autofocus="autofocus"
+                    style='width: 30%;' placeholder="패스워드 확인">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12">
+                </div>
+              </div>
+  
+              <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                  <button type="button" id='btn_withdrawal' class="btn btn-danger btn-md">회원탈퇴</button>
+  
+                </div>
+              </div>
+            </FORM>
+          </div>
+        </c:otherwise>
+      </c:choose>
     </c:when>
-    <c:otherwise>
-      <hr>
-      <DIV class='content_body'>
-        <DIV id='main_panel'></DIV>
-        <FORM name='frm2' id='frm2' method='POST' action='./withdrawal.do' class="form-horizontal">
-          <input type='hidden' name='memberid' id='memberid' value='${memberVO.memberid }'>
-  
-          <div class="form-group">
-            <label class="col-md-2 control-label" style='font-size: 0.9em;'>패스워드 확인</label>
-            <div class="col-md-10">
-              <input type='text' class="form-control" name='passwd_ck' id='passwd_ck' autofocus="autofocus"
-                style='width: 30%;' placeholder="패스워드 확인">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-12">
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-              <button type="button" id='btn_withdrawal' class="btn btn-danger btn-md">회원탈퇴</button>
-  
-            </div>
-          </div>
-        </FORM>
-      </div>
-    </c:otherwise>
   </c:choose>
+  
+  
 
   
 

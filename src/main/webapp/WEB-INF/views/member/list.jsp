@@ -46,21 +46,22 @@
     <ASIDE class="aside_right">
       <A href="javascript:location.reload();">새로고침</A>
       <span class='menu_divide' >│</span> 
-      <!-- <A href='./create.do'>회원 가입</A>
-      <span class='menu_divide' >│</span>  -->
       <A href='./list.do'>목록</A>
+      <!-- <span class='menu_divide' >│</span>
+      <A href='./create.do'>탈퇴회원</A> -->
     </ASIDE> 
    
     <div class='menu_line'></div>
     
     <table class="table table-hover" style='width: 100%;'>
       <colgroup>
-        <col style='width: 7%;' />
+        <col style='width: 5%;' />
+        <col style='width: 10%;' />
         <col style='width: 10%;' />
         <col style='width: 10%;' />
         <col style='width: 15%;' />
-        <col style='width: 18%;' />
         <col style='width: 30%;' />
+        <col style='width: 10%;' />
         <col style='width: 10%;' />
       </colgroup>
       <thead>
@@ -71,6 +72,7 @@
           <TH scope="col" style="text-align:center">이메일</TH>
           <TH scope="col" style="text-align:center">전화번호</TH>
           <TH scope="col" style="text-align:center">주소</TH>
+          <TH scope="col" style="text-align:center">탈퇴여부</TH>
           <TH scope="col" style="text-align:center">기타</TH>
         </tr>
       </thead>
@@ -82,6 +84,7 @@
       <c:set var="email" value ="${memberVO.email}" />
       <c:set var="phone" value ="${memberVO.phone}" />
       <c:set var="address" value ="${memberVO.address}" />
+      <c:set var="grade" value ="${memberVO.grade}" />
        
     <TR>
       <TD class=td_basic>${memberid}</TD>
@@ -99,10 +102,27 @@
           </c:otherwise>
         </c:choose>
       </TD>
+      <TD class='td_basic'>
+        <c:choose>
+          <c:when test="${grade == 99}"> <!-- 탈퇴회원 -->
+            Y
+          </c:when>
+          <c:otherwise>
+            N
+          </c:otherwise>
+        </c:choose>
+      </TD>
       <TD class='td_basic' style="margin: 0px;">
           <A href="./passwd_update.do?memberid=${memberid}"><IMG src='/member/images/passwd.png' width = "20px" height="20px" title='패스워드 변경'></A>
           <A href="./read.do?memberid=${memberid}"><IMG src='/member/images/update.png' width = "20px" height="20px" title='수정'></A>
-          <A href="./delete.do?memberid=${memberid}"><IMG src='/member/images/delete.png' width = "20px" height="20px" title='삭제'></A>
+          <c:choose>
+          <c:when test="${grade == 99}"> <!-- 탈퇴회원 -->
+          </c:when>
+          <c:otherwise>
+            <A href="./delete.do?memberid=${memberid}"><IMG src='/member/images/delete.png' width = "20px" height="20px" title='삭제'></A>
+          </c:otherwise>
+        </c:choose>
+          
       </TD>
       
     </TR>
