@@ -70,7 +70,6 @@
     background: orange;
     transition: ease 1s; /* animation 효과 1초 발생 */
   }
-
 </style>
 
 <DIV class='container_main'> 
@@ -97,28 +96,40 @@
       <A class='menu_link'  href='/faqlist'>자주묻는 질문(FAQ)</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>챗봇 서비스</A><span class='top_menu_sep'> </span>
       
-      <c:choose>
+       <c:choose>
         <c:when test="${sessionScope.id != null}"> <%-- 로그인 한 경우 --%>
-           <A class='menu_link'  href='/member/read.do' onclick="location.href=this.href+'?memberid='+${sessionScope.memberid };return false;" >My Page</A><span class='top_menu_sep'> </span>
-           [ ${sessionScope.id } ] <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span>           
+           <%-- <A class='menu_link'  href='/member/read.do' onclick="location.href=this.href+'?memberid='+${sessionScope.memberid };return false;" >My Page</A><span class='top_menu_sep'> </span>
+           [ ${sessionScope.id } ] <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span>            --%>
+           <c:choose>
+                <c:when test="${sessionScope.admin_flag == true}">  <%-- 관리자 로그인 --%>
+                  <A class='menu_link'  href='/member/list.do' >회원관리</A><span class='top_menu_sep'> </span>
+                                 관리자 [ ${sessionScope.id } ] <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span> 
+                </c:when>
+                
+                <c:otherwise> <%-- 회원 로그인 --%>
+                  <A class='menu_link'  href='/member/read.do' onclick="location.href=this.href+'?memberid='+${sessionScope.memberid };return false;" >My Page</A><span class='top_menu_sep'> </span>
+                  [ ${sessionScope.id } ] <A class='menu_link'  href='/member/logout.do' >Logout</A><span class='top_menu_sep'> </span> 
+                </c:otherwise>
+           </c:choose>
         </c:when>
+        
         <c:otherwise>
           <A class='menu_link'  href='/admin/login.do'>관리자 로그인</A><span class='top_menu_sep'> </span>
           <A class='menu_link'  href='/member/login.do' >Login</A><span class='top_menu_sep'> </span>   
         </c:otherwise>
       </c:choose>
-
-      <c:choose>
+        
+      <c:choose>  <%-- 관리자 전용 홈페이지 관리 hidden menu 개발 필요 --%>
         <c:when test="${sessionScope.adminid != null && sessionScope.admin_flag == true}">
           <a class='menu_link' href="/qnacatelist"><span class='menu_link' id=".">홈페이지 관리</span>  </a> 
         </c:when>
-        <c:otherwise> <%-- 로그인 하지 않은경우 표시 x --%>
+        <c:otherwise> <%-- 관리자로 로그인 하지 않은경우 표시 x --%>
             <span></span>
         </c:otherwise>
       </c:choose>
       
     </NAV>
   </DIV>
-  
+     
   <%-- 내용 --%> 
   <DIV class='content'>
