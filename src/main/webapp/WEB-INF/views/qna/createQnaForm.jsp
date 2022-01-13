@@ -36,11 +36,10 @@
       <div class="form-group">
            <label class="control-label col-md-2">질문 카테고리 선택</label>
            <div class="col-md-10">
-               <select name="qcateno">
-                      <option value="9" selected="selected">주택관련</option>  
-                      <option value="7">홈페이지 이용</option>
-                      <option value="8">기타 문의사항</option>
-                      <%-- 데이터베이스별 지정된 FK값과 해당 옵션의 값이 다를 수 있습니다. 확인하세요! --%>
+               <select name="qcateno"> <%-- db에서 동적으로 카테고리 선택 --%>
+                   <c:forEach var="qnacateVO" items="${list }" varStatus="info">
+                    <option value="${qnacateVO.qcateno }" ${qnacateVO.name=='상품' ? "selected='selected'" : "" } >${qnacateVO.name }</option>
+                   </c:forEach>   
               </select>
            </div>
         </div>  
@@ -63,11 +62,10 @@
         
         <div class="content_body_bottom">
           <button type="submit" class="btn btn-primary">등록</button>
-          <button type="button" onclick="location:href='/qnalist'" class="btn btn-primary">목록</button>
+          <button type="button" onclick="history.back()" class="btn btn-primary">뒤로가기</button>
         </div>
       </FORM>
       
       <jsp:include page="/WEB-INF/views/menu/bottom.jsp" flush='false' />
 </body>
 </html>
-

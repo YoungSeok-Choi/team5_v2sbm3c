@@ -57,6 +57,12 @@ public interface QnaDAOInter {
      * @return 해당 카테고리에 속한 QnA 개수
      */
     public int countByQnacateno(int qcateno);
+    
+    /**
+     * 
+     * @return 외래 키 (카테고리번호)에 해당하는  QnA 집합 리턴.
+     */
+    public List<QnaVO> joinQnaAndQcate(int qcateno);
 
 
 }

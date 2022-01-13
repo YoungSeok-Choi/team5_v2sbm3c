@@ -59,12 +59,11 @@
     <DIV class='content_body'>
       <TABLE class='table table-striped'>
         <colgroup>
-          <col style='width: 10%;'/>
-          <col style='width: 10%;'/>
-          <col style='width: 35%;'/>
-          <col style='width: 15%;'/>    
-          <col style='width: 10%;'/>
           <col style='width: 20%;'/>
+          <col style='width: 20%;'/>
+          <col style='width: 30%;'/>
+          <col style='width: 15%;'/>
+          <col style='width: 15%;'/>
         </colgroup>
        
         <thead>  
@@ -73,6 +72,14 @@
           <TH class="th_bs">본문</TH>
           <TH class="th_bs">생성(수정) 일자</TH>
           <TH class="th_bs">담당 관리자 번호</TH>
+        <c:choose>
+          <c:when test="${sessionScope.adminid != null && sessionScope.admin_flag == true}">
+             <th class="th_bs">수정/삭제</th>       
+          </c:when> 
+            <c:otherwise>
+              <th class="th_bs">비고</th>
+             </c:otherwise>
+        </c:choose> 
         </TR>
         </thead>
         
@@ -85,15 +92,23 @@
           <c:set var="faqno" value="${faq.faqno }"></c:set>
           
           <TR>
-            <TD class="td_bs"><a href="/categories?member_id=${title }">${title }</a></TD>
-            <TD class="td_bs">${text }</TD>
-            <TD class="td_bs">${cdate }</TD>
-            <TD class="td_bs_left">${adminid }</TD>
-            <TD class="td_bs">
+            <TD class="td_bs"><a href="/faq/${faqno }/read.do">${title }</a></TD>
+            <TD class="td_bs"><a href="/faq/${faqno }/read.do">${text }</a></TD>
+            <TD class="td_bs"><a href="/faq/${faqno }/read.do">${cdate }</a></TD>
+            <TD class="td_bs"><a href="/faq/${faqno }/read.do">${adminid }</a></TD>
+            <c:choose><%-- 관리자만 수정 / 삭제 가능 --%>
+               <c:when test="${sessionScope.adminid != null && sessionScope.admin_flag == true}">
+                  <TD class="td_bs">
                 <input type='hidden' value='${faqno }'>
                 <a href="/faq/${faqno }/update.do"><IMG src='/faq/images/update.png' width = "20px" height="20px" title='수정'></a>
                 <a href= "/faq/${faqno }/delete.do"><IMG src='/faq/images/delete.png'  width = "20px" height="20px" title='삭제'></a>
-            </TD>         
+                  </TD>     
+              </c:when> 
+              <c:otherwise>
+                <TD class="td_bs"><a href="/faq/${faqno }/read.do">-</a></TD>
+              </c:otherwise>
+            </c:choose>
+
           </TR>   
         </c:forEach>
 
@@ -105,8 +120,14 @@
     
      <div class="content_body_bottom">
         <button class="btn btn-primary btn-sm" onclick="location.href='/'">메인페이지</button>
-        <button class="btn btn-primary btn-sm" onclick="location.href='/faq'">FAQ 등록</button>
-    </div>
+            <c:choose>
+               <c:when test="${sessionScope.adminid != null && sessionScope.admin_flag == true}">
+                       <button class="btn btn-primary btn-sm" onclick="location.href='/faq'">FAQ 등록</button>
+              </c:when> 
+              <c:otherwise>
+              </c:otherwise>
+        </c:choose>
+    </div><%-- 관리자만 등록 가능 --%>
     
      <jsp:include page="/WEB-INF/views/menu/bottom.jsp" flush='false' />
 </body>

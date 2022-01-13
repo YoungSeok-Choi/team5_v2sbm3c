@@ -41,7 +41,7 @@ public class FaqCont {
     
     
     @RequestMapping(value = "/faqlist", method = RequestMethod.GET)
-    public ModelAndView showFaqPage() {
+    public ModelAndView showFaqList() {
         ModelAndView mav = new ModelAndView();
         
         List<FaqVO> list = faqProc.getAll();
@@ -52,6 +52,30 @@ public class FaqCont {
         mav.addObject("lists", list);
         mav.setViewName("faq/faqlist");
         
+        return mav;
+    }
+    
+    /**
+     * 
+     * @param faqno
+     * @return 단일 페이지에 뿌려질 객체 + faqRead.jsp forward
+     */
+    @RequestMapping(value = "/faq/{faqno}/read.do", method = RequestMethod.GET)
+    public ModelAndView readFaq(@PathVariable String faqno) {
+        
+        ModelAndView mav = new ModelAndView();      
+        int pk = Integer.parseInt(faqno);
+        
+         FaqVO faqVO = null;
+         faqVO = faqProc.getOneWithPK(pk);
+         
+         if (faqVO != null) { // 조회된 객체가 있으면 read, 없다면 에러 페이지.
+             mav.addObject("faqVO", faqVO);
+             mav.setViewName("/faq/faqRead");
+         } else {
+             mav.addObject("code", "ObjNotFoundException");
+             mav.setViewName("/faq/msg");
+         }
         return mav;
     }
     

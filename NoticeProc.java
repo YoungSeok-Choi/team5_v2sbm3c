@@ -50,7 +50,4 @@ public class NoticeProc implements NoticeProcInter{
         return cnt;
     }
 
-
-
-
 }

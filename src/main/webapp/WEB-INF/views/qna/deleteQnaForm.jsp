@@ -18,8 +18,9 @@
 <script type="text/javascript">
 
 $(function () {
+  $('#btn_send').on('click', send);
   setRadioVal();
-  setDropdown();
+  //setDropdown();
 }); 
     
 // DB에 저장된 값에 따라 radio, select tag 값 세팅.
@@ -35,7 +36,15 @@ $(function () {
 
      }
 
-function setDropdown() {
+function send() {
+    if (confirm("정말로 삭제하시겠습니까?\n삭제이후 복구할 수 없습니다.") == true) {
+        $('#frm').submit();
+    } else {
+        return;
+    }
+}
+
+/*function setDropdown() {
   var dropdown_ck = '${qnaVO.qcateno}';
   //alert(dropdown_ck); 
   
@@ -48,7 +57,7 @@ function setDropdown() {
   } else {
     $("#fk1").prop("selected", true);
   }
-}
+}*/
 
 /* To-Do 
  *  정말로 삭제하시겠습까? 복구 안됩니다 확인하는 함수 만들어서 연결
@@ -75,51 +84,49 @@ function setDropdown() {
  <jsp:include page="/WEB-INF/views/menu/top.jsp" flush='false' />
         
  <DIV class='title_line'>삭제 확인창</DIV>
-      <FORM name='frm' method='POST' action='/qna/${qnano }/delete.do' class="form-horizontal">
+      <FORM name='frm' id='frm' method='POST' action='/qna/${qnano }/delete.do' class="form-horizontal">
         <input type="hidden" name="adminnid" value="1"> <%-- 관리자 개발후 변경 필요 --%>
-       
-        
-        <div class="form-group">
-           <label class="control-label col-md-2">제목</label>
-           <div class="col-md-10">
-           <span class="form-control" style='width: 90%;'>${title }</span>
-<%--              <input type='text' name='title' value='${title }' required="required" 
-                       autofocus="autofocus" class="form-control" style='width: 90%;'> --%>
-           </div>
-        </div>
-       
-       
-      <div class="form-group">
-           <label class="control-label col-md-2">질문 카테고리</label>
-           <div class="col-md-10">
-               <select name="qcateno">
-                      <option value="5" id="fk1">주택관련</option>  
-                      <option value="6" id="fk2">홈페이지 이용</option>
-                      <option value="7" id="fk3">기타 문의사항</option>
-                      <%-- 데이터베이스별 지정된 FK값과 해당 옵션의 값이 다를 수 있습니다. 확인하세요! --%>
-              </select>
-           </div>
-        </div>  
 
-        <div class="form-group">
-           <label class="control-label col-md-2">본문</label>
-           <div class="col-md-10">
-             <textarea name='text' required="required" class="form-control" rows="12" style='width: 90%;'>${text }</textarea>
-           </div>
-        </div>
-        
-         <div class="form-group">
-           <label class="control-label col-md-2">비밀글 </label>
-           <div class="col-md-10">
-           <IMG src='/member/images/lock.png' width = "18px" height="18px">
-            <input type="radio" name="secret" id="secretN" value="N">NO
-            <input type="radio" name="secret" id="secretY" value="Y">YES
-           </div>
-        </div>
+            <div class="content_body">
+              <label class="col-md-2">알림!!</label>
+              <div class="col-md-10">지나친 폭언과 욕설 및 정치적인 내용의 QnA인 경우, <b><i>관리자에 의해 삭제조치</i></b> 될 수 있습니다.</div>
+            </div>
+
+            <hr><br>
+            
+            <div class="content_body">
+               <label class="col-md-2">제목</label>
+               <div class="col-md-10">
+                ${qnaVO.title}
+               </div>
+            </div>
+            <br>
+
+            <div class="content_body">
+               <label class="col-md-2">본문</label>
+               <div class="col-md-10">
+                  <div class="textarea_basic">
+                   ${qnaVO.text}
+                 </div>
+               </div>
+            </div>
+            <br>
+
+            <div class="content_body_bottom">
+              <div class="col-md-6">
+                <label class="">생성일자: </label>
+                ${qnaVO.qdate}
+              </div>
+              <div class="col-md-6">
+                <label class="">비밀글 여부: </label>
+                ${qnaVO.secret }
+              </div>
+            </div>
+            <br>
         
         <div class="content_body_bottom">
-          <button type="submit" class="btn btn-primary">삭제하기</button>
-          <button type="button" onclick="location.href='/qnalist'" class="btn btn-primary">목록</button>
+          <button type="button" id="btn_send" class="btn btn-primary">삭제하기</button>
+          <button type="button" onclick="history.back()" class="btn btn-primary">뒤로가기</button>
         </div>
       
       </FORM>
