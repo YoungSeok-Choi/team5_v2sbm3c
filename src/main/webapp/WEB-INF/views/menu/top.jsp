@@ -45,12 +45,23 @@
         </c:otherwise>
       </c:choose>
         
-      <c:choose>  <%-- 관리자 전용 홈페이지 관리 hidden menu 개발 필요 --%>
+      <c:choose> 
         <c:when test="${sessionScope.adminid != null && sessionScope.admin_flag == true}">
-          <a class='menu_link' href="/qnacatelist"><span class='menu_link' id=".">홈페이지 관리</span>  </a> 
+            <div id="menu">
+              <ul>
+                <li><a href="/" class='link_menu_top'>홈페이지 관리</a>
+                      <ul>
+                          <li><a href='/member/list.do' class='link_menu_sub'>회원관리</a></li>
+                          <li><a href='/' class='link_menu_sub'>공지사항 관리</a></li>
+                          <li><a href='/qnacatelist' class='link_menu_sub'>QnA 관리</a></li>
+                          <li><a href='/' class='link_menu_sub'>주택매물 관리</a></li>
+                      </ul>
+                  </li>
+              </ul>
+            </div>
         </c:when>
         <c:otherwise> <%-- 관리자로 로그인 하지 않은경우 표시 x --%>
-            <span></span>
+          <span></span>
         </c:otherwise>
       </c:choose>
       

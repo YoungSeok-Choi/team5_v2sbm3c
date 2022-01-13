@@ -494,12 +494,16 @@
 
   /* id에 적용 */
   #menu {
-    width: 100%;
+    border-radius: 25px;
+    width: 120px;
     height: 50px;
-    background: #DD0000;
+    background: #FF9A88;
     line-height: 50px; 
     margin:0 auto;
     text-align: center;
+    position: fixed;
+    top: 20px;  
+    left: 70%;
   }
   
   /* float 속성의 가운데 정렬 선언 */
@@ -511,6 +515,7 @@
 
   /* top 메뉴 */
   #menu > ul > li {
+    border-radius: 25px;
     float: left;
     width: 130px;
     position: relative;
@@ -519,14 +524,15 @@
 
   /* top 메뉴에 마우스가 hover되었을 때 배경색을 변경 */
   #menu > ul > li:hover {
-    background-color: #EE0000;
+    background-color: #FF9A88;
   }
 
   /* 서브메뉴 속성 정의 */
   #menu > ul > li > ul {
+    border-radius: 25px;
     width: 130px;
     display: none;  /* 감춤 */
-    background: #FF0000;
+    background: #FF9A88;
     position: relative;
     left: 0%;
   }
@@ -537,7 +543,8 @@
   }
   
   #menu > ul > li > ul > li:hover {
-    background: orange;
+    border-radius: 25px;
+    background: #FF583B;
     transition: ease 1s; /* animation 효과 1초 발생 */
   }
     

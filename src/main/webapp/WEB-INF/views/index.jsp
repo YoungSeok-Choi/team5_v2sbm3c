@@ -24,6 +24,7 @@
     <%-- /static/images/resort02.jpg --%>
     <IMG src='/images/main_page.jpg' style='width: 50%;'>
   </DIV>
+
   
   <DIV style='margin: 0px auto; width: 90%;'>
     <DIV style='float: left; width: 50%;'>

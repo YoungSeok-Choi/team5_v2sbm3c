@@ -60,7 +60,7 @@ function send() {
 }
 
 function updateAnswerByWindow (answerno) {
-  alert(answerno);
+  //alert(answerno);
   var url = '/answer/' + answerno + '/update.do';
   var win = window.open(url, '답변 업데이트', 'width=800px, height=820px');
 
@@ -71,7 +71,7 @@ function updateAnswerByWindow (answerno) {
 }
 
 function deleteAnswerByWindow (answerno) {
-  alert(answerno);
+  //alert(answerno);
   var url = '/answer/' + answerno + '/delete.do';
   var win = window.open(url, '답변 업데이트', 'width=800px, height=820px');
 

@@ -58,8 +58,8 @@
         <%-- Answer 등록 --%>
          <c:when test="${code == 'Answer_create_success'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_success">Answer 등록 성공</span><br><br><br>
-            <button type='button' onclick="location.href='/qna/${qnano}/read.do" class="btn btn-primary">목록</button>
+            <span class="span_success">Answer 등록 성공</span><br><br>${param.qnano}
+            <button type='button'class="btn btn-primary"><a href="/qna/${param.qnano}/read.do">목록</a></button>
           </LI>                                                                      
         </c:when> 
          <c:when test="${code == 'Answer_create_fail'}"> <%-- Java if --%>
