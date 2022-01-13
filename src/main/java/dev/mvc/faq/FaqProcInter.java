@@ -19,6 +19,11 @@ public interface FaqProcInter {
      */
     public List<FaqVO> getListWithFK (int adminid);
     
+    /**
+     * 
+     * @param faqno 기본 키
+     * @return 해당 하는 객체 리턴
+     */
     public FaqVO getOneWithPK(int faqno);
     
     /**

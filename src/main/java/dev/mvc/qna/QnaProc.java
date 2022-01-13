@@ -47,6 +47,8 @@ public class QnaProc implements QnaProcInter{
         return qnaDAO.countByQnacateno(qcateno);
     }
 
-
-    
+    @Override
+    public List<QnaVO> joinQnaAndQcate(int qcateno) {
+        return qnaDAO.joinQnaAndQcate(qcateno);
+    }
 }

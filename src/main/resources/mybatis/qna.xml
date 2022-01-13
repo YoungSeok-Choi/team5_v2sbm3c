@@ -51,5 +51,12 @@
         where qcateno=#{qcateno}
     </delete>
     
+    <!-- fk에 해당하는 QnA 조회 -->
+    <select id="joinQnaAndQcate" resultType="dev.mvc.qna.QnaVO" parameterType="int">
+        select qnano, q.title, secret, q.text, q.qdate, q.qcateno, q.memberid
+        from qna_cate c, qna q
+        where c.qcateno=#{qcateno} and c.qcateno=q.qcateno
+    </select>
+    
     
 </mapper>

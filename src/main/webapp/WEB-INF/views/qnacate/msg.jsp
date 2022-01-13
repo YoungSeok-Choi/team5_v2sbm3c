@@ -28,13 +28,13 @@
          <%-- FaQ 삭제 --%>
          <c:when test="${code == 'qnacate_delete_success'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">QnA Catogiry 삭제에 성공하였습니다!</span><br>
+            <span class="span_fail">QnA Category 삭제에 성공하였습니다!</span><br>
             <button type='button' onclick="location.href='/qnacatelist'" class="btn btn-primary">목록</button>
           </LI>                                                                 
         </c:when>
         <c:when test="${code == 'qnacate_delete_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">QnA Catogiry 삭제에 실패하였습니다.</span><br>
+            <span class="span_fail">QnA Category 삭제에 실패하였습니다.</span><br>
             <span class="span_fail">다시 시도해 주십시오.</span>
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                      
@@ -43,13 +43,13 @@
           <%-- FaQ 수정 --%>
           <c:when test="${code == 'qnacate_update_success'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_success">QnA Catogiry 업데이트 성공</span><br>
+            <span class="span_success">QnA Category 업데이트 성공</span><br>
             <button type='button' onclick="location.href='/qnacatelist'" class="btn btn-primary">목록</button>
           </LI>                                                                 
         </c:when>
         <c:when test="${code == 'qnacate_update_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">QnA Catogiry 업데이트 실패</span>
+            <span class="span_fail">QnA Category 업데이트 실패</span>
             <span class="span_fail">다시 시도해 주십시오.</span>
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                             
@@ -58,13 +58,13 @@
         <%-- QnA 등록 --%>
          <c:when test="${code == 'qnacate_create_success'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_success">QnA Catogiry 등록 성공</span><br>
+            <span class="span_success">QnA Category 등록 성공</span><br>
             <button type='button' onclick="location.href='/qnacatelist'" class="btn btn-primary">목록</button>
           </LI>                                                                      
         </c:when> 
          <c:when test="${code == 'qnacate_create_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">QnA Catogiry 등록 실패</span><br>
+            <span class="span_fail">QnA Category 등록 실패</span><br>
             <span class="span_fail">다시 시도해 주십시오.</span>
             <button type='button' onclick="location.href='/'" class="btn btn-primary">홈으로</button>
           </LI>                                                                      

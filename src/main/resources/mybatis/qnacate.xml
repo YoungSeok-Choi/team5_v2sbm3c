@@ -32,11 +32,4 @@
         where qcateno=#{qcateno}    
     </delete>
     
-
-    
-    
-    <!-- 자식레코드 존재시 삭제 + 카테고리 read시 조인 쿼리 -->
-
-
-
 </mapper>

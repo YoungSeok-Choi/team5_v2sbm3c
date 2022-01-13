@@ -44,9 +44,10 @@ function read_update_ajax(qcateno) {
    // form 값을 queryString으로 변환해주는 것임
    // qcateno=&name=&adminid=1
    // params = $('#frm_update').serialize(); 
+
    var params = "";
    params = 'qcateno=' + qcateno;
-   alert(params); //  테스트 확인
+   // alert(params); //  테스트 확인
 
    $.ajax(
    {
@@ -95,7 +96,7 @@ function read_delete_ajax(qcateno) {
    var params = "";
    params = 'qcateno=' + qcateno;
 
-   alert(params); //  테스트 확인
+   // alert(params); //  테스트 확인
 
     $.ajax(
     {
@@ -193,9 +194,21 @@ function delete_qna_by_qcateno() {
 
     <jsp:include page="/WEB-INF/views/menu/top.jsp" flush='false' />
     <DIV class='title_line'> 주택관리 시스템 QnA Category 관리 (관리자 전용) </DIV>
+
+
     
 <DIV class='content_body'>
   <!-- 신규 등록 -->
+
+      <ASIDE class="aside_right">
+        <A href="javascript:location.reload();">새로고침</A>
+         <span class='menu_divide' >│</span> 
+        <A href='./list.do'>목록</A>
+      </ASIDE> 
+
+      <div class='menu_line'></div>
+      <br>
+  
   
   <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
     <FORM name='frm_create' id='frm_create' method='POST' action='/qnacate'>
@@ -209,9 +222,16 @@ function delete_qna_by_qcateno() {
       <select name='adminid' id='adminid_create'>
         <option value='1' selected="selected">전체 관리자</option>
         <option value='1'>상품관련 관리자</option>
-        <option value='1'>홈페이지 관리자</option>
+        <option value=''>홈페이지 관리자</option>
       </select>
-  
+
+ <!--수정해야함!   <select name="qcateno"> <%-- db에서 동적으로 카테고리 선택 --%>
+                   <c:forEach var="qnacateVO" items="${list }" varStatus="info">
+                    <option value="${qnacateVO.qcateno }" ${qnacateVO.name=='상품' ? "selected='selected'" : "" } >${qnacateVO.name }</option>
+                   </c:forEach>   
+              </select> -->
+
+
 <!--       <label>형식</label>
       <select name='visible' id='visible'>
         <option value='Y' selected="selected">Y</option>
@@ -241,6 +261,13 @@ function delete_qna_by_qcateno() {
         <option value='1'>상품관련 관리자</option>
         <option value='1'>홈페이지 관리자</option>
       </select>
+
+
+ <!--수정해야함!   <select name="qcateno"> <%-- db에서 동적으로 카테고리 선택 --%>
+                   <c:forEach var="qnacateVO" items="${list }" varStatus="info">
+                    <option value="${qnacateVO.qcateno }" ${qnacateVO.name=='상품' ? "selected='selected'" : "" } >${qnacateVO.name }</option>
+                   </c:forEach>   
+              </select> -->
 
 <!--   
          <label>형식</label>
@@ -285,12 +312,10 @@ function delete_qna_by_qcateno() {
     <DIV class='content_body'>
       <TABLE class='table table-striped'>
         <colgroup>
-          <col style='width: 10%;'/>
-          <col style='width: 10%;'/>
-          <col style='width: 35%;'/>
-          <col style='width: 15%;'/>    
-          <col style='width: 10%;'/>
           <col style='width: 20%;'/>
+          <col style='width: 20%;'/>
+          <col style='width: 35%;'/>
+          <col style='width: 25%;'/>    
         </colgroup>
        
         <thead>  
@@ -311,9 +336,9 @@ function delete_qna_by_qcateno() {
           <%-- visible 변수. --%>
        
           <TR>
-            <TD class="td_bs"><a href="/">${name }</a></TD>
-            <TD class="td_bs">추가에정</TD>
-            <TD class="td_bs">${adminid }</TD>
+            <TD class="td_bs"><a href="/qnacate/read_one.do?qcateno=${qcateno}&name=${name}">${name }</a></TD>
+            <TD class="td_bs"><a href="/qnacate/read_one.do?qcateno=${qcateno}&name=${name}">추가예정</a></TD>
+            <TD class="td_bs"><a href="/qnacate/read_one.do?qcateno=${qcateno}&name=${name}">${adminid}</a></TD>                  
             <TD class="td_bs">
               <a href="javascript: read_update_ajax(${qcateno })"><IMG src='/qnacate/images/update.png' width = "20px" height="20px" title='수정'></a>
               <a href="javascript: read_delete_ajax(${qcateno })"><IMG src='/qnacate/images/delete.png'  width = "20px" height="20px" title='삭제'></a>

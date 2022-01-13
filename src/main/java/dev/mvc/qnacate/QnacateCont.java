@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.qna.QnaProcInter;
+import dev.mvc.qna.QnaVO;
 
 @Controller
 public class QnacateCont {
@@ -45,7 +46,7 @@ public class QnacateCont {
     
     
     @RequestMapping(value = "/qnacatelist", method=RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView showQnacateList() {
         
         ModelAndView mav =  new ModelAndView();
         
@@ -61,7 +62,25 @@ public class QnacateCont {
     }
     
     /**
-     * 
+     *  특정 카테고리 read 시 연관 QnA가 나오도록 개발
+     *  
+     * @param qcateno
+     * @return
+     */
+    @RequestMapping(value = "/qnacate/read_one.do", method = RequestMethod.GET)
+    public ModelAndView readQcate(int qcateno, String name) {
+        ModelAndView mav =  new ModelAndView();
+        
+        List<QnaVO> list = qnaProc.joinQnaAndQcate(qcateno);
+        
+        mav.addObject("list", list);
+        mav.addObject("qcatename", name);
+        mav.setViewName("/qnacate/qnacateRead");
+        return mav;
+    }
+    
+    /**
+     * insert a category into DB
      * @param qnacateVO
      * @return 내부 처리 이후 qnacatelist 페이지 이동
      */
@@ -167,6 +186,6 @@ public class QnacateCont {
         mav.addObject("url", "/qnacate/msg");
         mav.setViewName("redirect:/qnacate/msg.do");
         return mav;
-    }
+    }   
     
 }

@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.answer.AnswerProcInter;
+import dev.mvc.answer.AnswerVO;
 import dev.mvc.member.MemberProcInter;
+import dev.mvc.qnacate.QnacateProcInter;
+import dev.mvc.qnacate.QnacateVO;
 
 
 @Controller
@@ -24,6 +28,15 @@ public class QnaCont {
     @Qualifier("dev.mvc.qna.QnaProc")
     private QnaProcInter qnaProc;
     
+    // 스프링 컨테이너에서 해당 이름의 bean 조회 이후 injection
+    @Autowired
+    @Qualifier("dev.mvc.qnacate.QnacateProc")
+    private QnacateProcInter qnacateProc;
+    
+    // qnaRead에서 관리자의 답변 글을 가져오기 위해 포함.
+    @Autowired
+    @Qualifier("MyAnswerProc")
+    private AnswerProcInter answerProc;
     
     /**
      * 새로고침 방지, EL에서 param으로 접근
@@ -33,31 +46,31 @@ public class QnaCont {
     public ModelAndView msg(String url, String code){
       ModelAndView mav = new ModelAndView();
       
-      // msg 메서드의 매개변수 이름과, rediect로 보낸 Proc메서드의 변수 binding
-      //      System.out.println(code);
-      //      System.out.println(url);
-      
       mav.addObject("code", code);
-      mav.setViewName(url); // forward
+      mav.setViewName(url); 
       
       return mav; // forward
     }
     
+    
+    /**
+     *  해당 qna가 어디 카테고리에 소속돼있는지 알고싶다.
+     *  어떻게할까? (VO에 카테고리 String추가하고, 조인 때려야겠지.) 
+     * 
+     */
+    
     //show QnA list Page
     @RequestMapping(value = "/qnalist", method=RequestMethod.GET)
-    public ModelAndView showQnaPage(HttpSession session) {
+    public ModelAndView showQnaList(HttpSession session) {
         
         ModelAndView mav = new ModelAndView();
         
         // 세션변수가 사라지는 문제가 있음. 예외발생시 다시 로그인 하도록 유도
+        // 관리자 로그인 이후 MYqna 메뉴 클릭시 해당 코드가 동작. --> view 단에서 메뉴를 가렸지만. 기능은 남겨둠.
         try {
             
             int memberid = (int)session.getAttribute("memberid");
             List<QnaVO> list = qnaProc.getListWithMemberid(memberid);
-            
-//          System.out.println("************************* Test Started *************************");
-//          System.out.println("check_QnaVOList length" + list.size());
-//          System.out.println("************************* Test Ended *************************");
             
             mav.addObject("lists", list);
             mav.setViewName("/qna/qnalist"); //WEB-INF/views/qna/qnalist.jsp
@@ -70,12 +83,48 @@ public class QnaCont {
 
         return mav;
     }
+    
+    // 파라미터로 카테고리 이름 + cate Table pk가 필요함. 
+    // select 쿼리 두번이 효율적일지, join쿼리 한번이 효율적일지 생각해보기
+    
+     // 단일객체 조회 이후 read 페이지에 전달하는 컨트롤러 (답변 테이블에서 답변도 가져옴.)
+    @RequestMapping(value = "/qna/{qnano}/read.do")
+    public ModelAndView readQna(@PathVariable String qnano) {
+        ModelAndView mav = new ModelAndView();
+        QnaVO qnaVO = null;
+        AnswerVO answerVO = null;
+        
+        int pk = Integer.parseInt(qnano);
+        qnaVO = qnaProc.getOneWithPK(pk);
+        answerVO = answerProc.getOneByFk(pk); // 외래 키로 답변 찾아오기.
+        
+        // 추후 메소드 추출로 변경되지 않는 부분 리팩토링하기.
+        if (qnaVO != null) {
+            mav.addObject("qnaVO", qnaVO);
+            mav.addObject("answerVO", answerVO);
+            mav.setViewName("/qna/qnaRead");
+        } else {
+            mav.addObject("code","ObjNotFoundException");
+            mav.addObject("url", "/qna/msg");
+            mav.setViewName("redirect:/qna/msg.do");
+        }
+        
+        return mav;
+    }
 
+    
     // when click QnA 등록 Button from client
     @RequestMapping(value = "/qna", method=RequestMethod.GET)
     public ModelAndView createForm() {
         
         ModelAndView mav = new ModelAndView();
+        
+        
+        // view에서 카테고리 선택을 위해 필요.
+        // null 인 경우(DB가 비었거나, 조회가 안되는경우 )에 커스텀 exception 발생시키는 로직 만들어보기.
+        List<QnacateVO> list = null;
+        list = qnacateProc.findCateList();
+        mav.addObject("list", list);
         
         mav.setViewName("/qna/createQnaForm");
         return mav;
@@ -88,18 +137,15 @@ public class QnaCont {
         
         ModelAndView mav = new ModelAndView();
         
-        int memberid = (int)session.getAttribute("memberid");  // ("String", Object) type, conversion needed
+        // ("String", Object) type, conversion needed
+        int memberid = (int)session.getAttribute("memberid"); 
         
-//        System.out.println("************************* Test Started *************************");
-//        System.out.println("check_Memberid From session Attribute" + memberid);
-//        System.out.println("************************* Test Ended *************************");
-        
-        qnaVO.setMemberid(memberid); // 어떤 유저가 추가한 QnA인지 분류하기 위해 FK setting
-        
+        // 어떤 유저가 추가한 QnA인지 분류하기 위해 FK setting
+        qnaVO.setMemberid(memberid);
         int result = qnaProc.createQna(qnaVO);
  
         if (result == 1) {
-            mav.addObject("code", "qna_create_success");
+            mav.addObject("code", "qna_create_success"); 
         } else {
             mav.addObject("code", "qna_create_fail");
         }
@@ -117,11 +163,14 @@ public class QnaCont {
         ModelAndView mav = new ModelAndView();
         // 1. 수정할 QnA의 기본키 획득 -> 2. DB조회 후 view에 forwarding
         int pk = Integer.parseInt(qnano);
+        List<QnacateVO> list = null;   
         
+        list = qnacateProc.findCateList();
         QnaVO qnaVO = qnaProc.getOneWithPK(pk);
         
         // DB에 값이 읽혀오지 않았을 경우, qnaVO == null 인 경우 에외처리 작성하기.
         mav.addObject("qnaVO", qnaVO);
+        mav.addObject("list", list);
         mav.setViewName("/qna/updateQnaForm");
         
         return mav;  
