@@ -23,7 +23,7 @@
 >- 최용석: 메일주소  
 
 
-### Content
+### Table of Contents
 
  >0. Requirements
  >1. (Mac) Project Setup
@@ -31,9 +31,6 @@
  >3. EndPoints (API's)
  >4. References
  
- ### Content
- 
- > blahblah
  
  ### Requirements
  
