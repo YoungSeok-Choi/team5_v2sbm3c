@@ -20,7 +20,7 @@
 >- 조세은: 메일주소  
 >- 차대현: 메일주소  
 >- 하지희: 메일주소  
->- 최용석: [dydtjr1717@gmail.com]
+>- 최용석: [dydtjr1717@gmail.com](dydtjr1717@gmail.com)
 
 
 ### Table of Contents
