@@ -10,7 +10,7 @@
       <A class='menu_link'  href='/' >심슨's House</A><span class='top_menu_sep'> </span>  
  
       <A class='menu_link'  href='/'>공지사항</A><span class='top_menu_sep'> </span>
-      <A class='menu_link'  href='/'>주택정보 조회</A><span class='top_menu_sep'> </span>
+      <A class='menu_link'  href='/house/list.do'>주택정보 조회</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>주택 추천</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/'>챗봇 서비스</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/faqlist'>자주묻는 질문(FAQ)</A><span class='top_menu_sep'> </span>
